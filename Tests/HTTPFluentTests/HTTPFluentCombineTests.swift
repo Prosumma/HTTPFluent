@@ -23,23 +23,18 @@ final class HttpFluentCombineTests: XCTestCase {
     func print(slideshows: Slideshows) {
       Swift.print(slideshows)
     }
-    HTTPClient.bin.path("json").jsonPublisher(decoding: Slideshows.self).sink(receiveCompletion: fulfill(e), receiveValue: print(slideshows:)).store(in: &cancellables)
+    HTTPClient.bin.path("json").decode(json: Slideshows.self).publisher.sink(receiveCompletion: fulfill(e), receiveValue: print(slideshows:)).store(in: &cancellables)
     wait(for: [e], timeout: 10)
   }
 
   func testPostJSONReactively() {
     let e = expectation(description: "http")
     let slide = Slide(title: "Posted Reactively", type: "all")
-    HTTPClient.bin.path("post").post(json: slide).accept(.json).publisher.decodeToString().sink(receiveCompletion: fulfill(e)) { s in
+    HTTPClient.bin.path("post").post(json: slide).accept(.json).decode(String.self).publisher.sink(receiveCompletion: fulfill(e)) { s in
       print(s)
     }.store(in: &cancellables)
     wait(for: [e], timeout: 10)
   }
-
-  static var allTests = [
-      ("testGetJSONReactively", testGetJSONReactively),
-      ("testPostJSONReactively", testPostJSONReactively)
-  ]
 }
 
 #endif
