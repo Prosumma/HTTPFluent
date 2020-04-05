@@ -29,4 +29,8 @@ public extension HTTP {
   func put<JSON: Encodable>(json: JSON, encoder: JSONEncoder = JSONEncoder()) -> Builder {
     content(type: .json).put { try encoder.encode(json) }
   }
+  
+  func put(form: FormData) -> Builder {
+    content(type: form.contentType).put(data: form.encode())
+  }
 }

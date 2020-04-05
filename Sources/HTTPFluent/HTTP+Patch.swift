@@ -29,5 +29,9 @@ public extension HTTP {
   func patch<JSON: Encodable>(json: JSON, encoder: JSONEncoder = JSONEncoder()) -> Builder {
     content(type: .json).patch { try encoder.encode(json) }
   }
+  
+  func patch(form: FormData) -> Builder {
+    content(type: form.contentType).patch(data: form.encode())
+  }
 }
 
