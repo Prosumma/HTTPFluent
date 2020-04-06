@@ -11,8 +11,8 @@ import Combine
 import Foundation
 
 public extension HTTP {
-  private func put(encode: @escaping HTTPEncode) -> Builder {
-    body(encode: encode).method(.put)
+  private func put(_ encode: @escaping HTTPEncode) -> Builder {
+    body(encode).method(.put)
   }
   
   func put(data: Data) -> Builder {

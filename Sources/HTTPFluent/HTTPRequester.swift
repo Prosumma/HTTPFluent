@@ -49,10 +49,12 @@ public struct DefaultHTTPRequester: HTTPRequester {
       guard let response = response as? HTTPURLResponse, let data = data else {
         return
       }
-      let status = response.statusCode
-      if !configuration.permittedStatusCodes.contains(status) {
-        result = .failure(.http(status: status, response: data))
-        return
+      do {
+        try configuration.permit(response: response, data: data)
+      } catch let e as HTTPError {
+        result = .failure(e)
+      } catch {
+        result = .failure(.error(error))
       }
       result = .success(data)
     }
@@ -65,10 +67,7 @@ public struct DefaultHTTPRequester: HTTPRequester {
       guard let response = response as? HTTPURLResponse else {
         throw HTTPError.unknown
       }
-      let status = response.statusCode
-      if !configuration.permittedStatusCodes.contains(status) {
-        throw HTTPError.http(status: status, response: data)
-      }
+      try configuration.permit(response: response, data: data)
       return data
     }
     .mapToHttpError()

@@ -15,8 +15,16 @@ public extension HTTP {
       b.client.request(request, queue: b._queue) { result in
         let wrapper: Wrapper
         switch result {
-        case .success(let data): wrapper = .init(httpCatching: { try b._decode(data) })
-        case .failure(let error): wrapper = .init(httpError: error)
+        case .success(let data):
+          do {
+            wrapper = .init(httpOutput: try b._decode(data))
+          } catch let e as HTTPError {
+            wrapper = .init(httpError: e)
+          } catch {
+            wrapper = .init(httpError: .decoding(error))
+          }
+        case .failure(let error):
+          wrapper = .init(httpError: error)
         }
         complete(wrapper)
       }

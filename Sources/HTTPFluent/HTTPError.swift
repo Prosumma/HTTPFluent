@@ -12,7 +12,7 @@ public enum HTTPError: Error {
   case malformedUrl
   case encoding(Error?)
   case decoding(Error?)
-  case http(status: Int, response: Data)
+  case http(response: HTTPURLResponse, data: Data)
   
   public static var unknown: HTTPError {
     .error(nil)
