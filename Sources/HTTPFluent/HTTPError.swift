@@ -14,7 +14,6 @@ public enum HTTPError: Error {
   case decoding(Error?)
   case http(response: HTTPURLResponse, data: Data)
   
-  public static var unknown: HTTPError {
-    .error(nil)
-  }
+  public static let unknown = HTTPError.error(nil)
 }
+
