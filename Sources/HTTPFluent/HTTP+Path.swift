@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  HTTP+Path.swift
 //  
 //
 //  Created by Gregory Higley on 4/4/20.

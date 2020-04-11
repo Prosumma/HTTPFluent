@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  String+Const.swift
 //  
 //
 //  Created by Gregory Higley on 4/1/20.

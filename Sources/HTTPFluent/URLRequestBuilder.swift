@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  URLRequestBuilder.swift
 //  
 //
 //  Created by Gregory Higley on 4/4/20.
@@ -80,6 +80,9 @@ public struct URLRequestBuilder<Wrapper: OutputWrapper>: HTTP {
 public extension URLRequestBuilder where Output == Data {
   init(client: HTTPClient) {
     self.init(client: client, decode: { data in data })
+  }
+  init(baseURL: String) {
+    self.init(client: HTTPClient(baseURL: baseURL))
   }
 }
 

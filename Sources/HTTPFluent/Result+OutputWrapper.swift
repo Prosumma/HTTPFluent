@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Result+OutputWrapper.swift
 //  
 //
 //  Created by Gregory Higley on 4/5/20.

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  HTTPConfiguration.swift
 //  
 //
 //  Created by Gregory Higley on 3/31/20.
@@ -21,8 +21,7 @@ open class DefaultHTTPConfiguration: HTTPConfiguration {
     return Set(200..<206)
   }
   open func permit(response: HTTPURLResponse, data: Data) throws {
-    let status = response.statusCode
-    if !permittedStatusCodes.contains(status) {
+    if !permittedStatusCodes.contains(response.statusCode) {
       throw HTTPError.http(response: response, data: data)
     }
   }

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  FormData.swift
 //  
 //
 //  Created by Gregory Higley on 4/1/20.
@@ -82,11 +82,9 @@ public struct FormData {
 
   private func urlEncode() -> Data {
     var entries: [String] = []
-    for (field, value) in contents {
-      if !(value is File) {
-        let entry = field.urlQueryComponentEncoded + "=" + "\(value)".urlQueryComponentEncoded
-        entries.append(entry)
-      }
+    for (field, value) in contents where value is File {
+      let entry = field.urlQueryComponentEncoded + "=" + "\(value)".urlQueryComponentEncoded
+      entries.append(entry)
     }
     return entries.joined(separator: "&").data(using: .utf8)!
   }

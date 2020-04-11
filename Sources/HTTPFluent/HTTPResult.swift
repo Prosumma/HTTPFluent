@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  HTTPResult.swift
 //  
 //
 //  Created by Gregory Higley on 3/31/20.
