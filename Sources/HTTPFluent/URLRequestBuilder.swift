@@ -11,15 +11,15 @@ import Foundation
 public struct URLRequestBuilder<Wrapper: OutputWrapper>: HTTP {
   public typealias Output = Wrapper.Output
   
-  public let client: HTTPClient
-  
+  let client: HTTPClient
   let _decode: HTTPDecode<Output>
+  
   var _encode: HTTPEncode?
-  var _method: HTTPMethod = .get
-  var _query: [URLQueryItem] = []
-  var _path: String?
-  var _queue: DispatchQueue
   var _headers: [String: String] = [:]
+  var _method: HTTPMethod = .get
+  var _path: String?
+  var _query: [URLQueryItem] = []
+  var _queue: DispatchQueue
   
   public init(client: HTTPClient, decode: @escaping HTTPDecode<Output>) {
     self._queue = client.configuration.defaultQueue
@@ -30,11 +30,11 @@ public struct URLRequestBuilder<Wrapper: OutputWrapper>: HTTP {
   public init<PreviousWrapper: OutputWrapper>(copy: URLRequestBuilder<PreviousWrapper>, decode: @escaping HTTPDecode<Output>) {
     self.init(client: copy.client, decode: decode)
     _encode = copy._encode
-    _method = copy._method
-    _query = copy._query
-    _path = copy._path
-    _queue = copy._queue  
     _headers = copy._headers
+    _method = copy._method
+    _path = copy._path
+    _query = copy._query
+    _queue = copy._queue
   }
   
   public init<PreviousWrapper: OutputWrapper>(copy: URLRequestBuilder<PreviousWrapper>) where PreviousWrapper.Output == Output {

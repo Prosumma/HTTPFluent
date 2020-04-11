@@ -21,7 +21,7 @@ final class HttpFluentRequestTests: XCTestCase {
   }
 
   func testPostJSON() {
-    let e = expectation(description: "http")
+    let e = expectation(description: "http")    
     let slide = Slide(title: "You", type: "all")
     HTTPClient.bin
       .path("post")

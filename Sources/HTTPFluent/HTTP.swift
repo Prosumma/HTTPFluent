@@ -15,12 +15,12 @@ public protocol HTTP {
 }
 
 public extension HTTP {
-  func build<Value>(_ keyPath: WritableKeyPath<Builder, Value>, _ value: Value) -> Builder {
+  internal func build<Value>(_ keyPath: WritableKeyPath<Builder, Value>, _ value: Value) -> Builder {
     var b = builder
     b[keyPath: keyPath] = value
     return b
   }
-  
+    
   func method(_ method: HTTPMethod) -> Builder {
     build(\._method, method)
   }
