@@ -51,12 +51,12 @@ public struct DefaultHTTPRequester: HTTPRequester {
       }
       do {
         try configuration.permit(response: response, data: data)
+        result = .success(data)
       } catch let e as HTTPError {
         result = .failure(e)
       } catch {
         result = .failure(.error(error))
       }
-      result = .success(data)
     }
     task.resume()
   }
