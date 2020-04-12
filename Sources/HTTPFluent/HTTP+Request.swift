@@ -28,7 +28,6 @@ public extension HTTP {
         }
         complete(wrapper)
       }
-      break
     case .failure(let error):
       b._queue.async {
         complete(.init(httpError: error))

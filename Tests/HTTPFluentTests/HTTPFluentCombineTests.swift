@@ -9,6 +9,7 @@ func fulfill<E: Error>(_ e: XCTestExpectation, expectError: Bool = false) -> (Su
   return { c in
     if expectError {
       if case .finished = c {
+        //swiftlint:disable:next xctfail_message
         XCTFail()
       }
     } else {
@@ -56,18 +57,19 @@ final class HttpFluentCombineTests: XCTestCase {
       .store(in: &cancellables)
     wait(for: [e], timeout: 10)
   }
-  
+
   func testHTTPStatusCodeReactively() {
     let e = expectation(description: "http")
+    let statusCode = 500
     HTTPClient.bin
-      .path("status", 500)
+      .path("status", statusCode)
       .accept(.json)
       .method(.put)
       .decode(String.self)
       .publisher
       .sink(
         receiveCompletion: fulfill(e, expectError: true),
-        receiveValue: { _ in XCTFail() }
+        receiveValue: { _ in XCTFail("Expected HTTP Status \(statusCode).") }
       )
       .store(in: &cancellables)
     wait(for: [e], timeout: 10)

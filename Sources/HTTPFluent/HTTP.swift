@@ -20,17 +20,16 @@ public extension HTTP {
     b[keyPath: keyPath] = value
     return b
   }
-    
+
   func method(_ method: HTTPMethod) -> Builder {
     build(\._method, method)
   }
-  
+
   func body(_ encode: @escaping HTTPEncode) -> Builder {
     build(\._encode, encode)
   }
-  
+
   func queue(_ queue: DispatchQueue) -> Builder {
     build(\._queue, queue)
   }
 }
-

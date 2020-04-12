@@ -16,4 +16,3 @@ extension Optional: OutputWrapper {
     self = .some(output)
   }
 }
-

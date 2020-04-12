@@ -10,23 +10,23 @@ import Foundation
 
 public struct URLRequestBuilder<Wrapper: OutputWrapper>: HTTP {
   public typealias Output = Wrapper.Output
-  
+
   let client: HTTPClient
   let _decode: HTTPDecode<Output>
-  
+
   var _encode: HTTPEncode?
   var _headers: [String: String] = [:]
   var _method: HTTPMethod = .get
   var _path: String?
   var _query: [URLQueryItem] = []
   var _queue: DispatchQueue
-  
+
   public init(client: HTTPClient, decode: @escaping HTTPDecode<Output>) {
     self._queue = client.configuration.defaultQueue
     self.client = client
     self._decode = decode
   }
-  
+
   public init<PreviousWrapper: OutputWrapper>(copy: URLRequestBuilder<PreviousWrapper>, decode: @escaping HTTPDecode<Output>) {
     self.init(client: copy.client, decode: decode)
     _encode = copy._encode
@@ -36,11 +36,11 @@ public struct URLRequestBuilder<Wrapper: OutputWrapper>: HTTP {
     _query = copy._query
     _queue = copy._queue
   }
-  
+
   public init<PreviousWrapper: OutputWrapper>(copy: URLRequestBuilder<PreviousWrapper>) where PreviousWrapper.Output == Output {
     self.init(copy: copy, decode: copy._decode)
   }
-  
+
   public var builder: URLRequestBuilder<Wrapper> {
     return self
   }
@@ -53,7 +53,7 @@ public struct URLRequestBuilder<Wrapper: OutputWrapper>: HTTP {
       components.percentEncodedPath += "/" + path
     }
     if _query.count > 0 {
-      components.queryItems = _query;
+      components.queryItems = _query
     }
     guard let url = components.url, !url.isFileURL else {
       return .failure(.malformedUrl)
@@ -85,4 +85,3 @@ public extension URLRequestBuilder where Output == Data {
     self.init(client: HTTPClient(baseURL: baseURL))
   }
 }
-

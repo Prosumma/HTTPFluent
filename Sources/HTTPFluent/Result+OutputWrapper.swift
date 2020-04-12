@@ -16,4 +16,3 @@ extension Result: OutputWrapper where Failure == HTTPError {
     self = .success(output)
   }
 }
-

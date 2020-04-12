@@ -21,7 +21,7 @@ final class HttpFluentRequestTests: XCTestCase {
   }
 
   func testPostJSON() {
-    let e = expectation(description: "http")    
+    let e = expectation(description: "http")
     let slide = Slide(title: "You", type: "all")
     HTTPClient.bin
       .path("post")
@@ -41,8 +41,9 @@ final class HttpFluentRequestTests: XCTestCase {
 
   func testHttpStatusCode() {
     let e = expectation(description: "http")
+    let statusCode = 500
     HTTPClient.bin
-      .path("status", 500)
+      .path("status", statusCode)
       .accept(.json)
       .method(.put)
       .decode(String.self)
@@ -50,12 +51,14 @@ final class HttpFluentRequestTests: XCTestCase {
         switch result {
         case let .failure(.http(response: response, data: _)):
           print(response.statusCode)
+        case let .success(s):
+          XCTFail("Expected HTTP Status \(statusCode) but got \(s).")
         default:
-          XCTFail()
+          XCTFail("Expected HTTP Status \(statusCode).")
         }
         e.fulfill()
       }
     wait(for: [e], timeout: 10)
   }
-  
+
 }

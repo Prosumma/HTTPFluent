@@ -95,7 +95,7 @@ public struct FormData {
     case .urlEncoded: return urlEncode()
     }
   }
-  
+
   public var contentType: String {
     switch encoding {
     case .formEncoded: return "multipart/form-data;boundary=\"\(boundary)\""

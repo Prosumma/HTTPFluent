@@ -28,7 +28,7 @@ open class DefaultHTTPConfiguration: HTTPConfiguration {
   open var defaultQueue: DispatchQueue {
     return .global()
   }
-  open var defaultHeaders: [String : String] {
+  open var defaultHeaders: [String: String] {
     return [:]
   }
   open subscript<T>(type: T.Type) -> HTTPDecode<T>? {
