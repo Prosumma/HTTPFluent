@@ -53,7 +53,11 @@ public struct HTTPClient: HTTP {
   }
 
   func request(_ request: URLRequest, queue: DispatchQueue, complete: @escaping HTTPResultComplete<Data>) {
-    requester(request, configuration: configuration, queue: queue, complete: complete)
+    #if swift(>=5.2)
+      requester(request, configuration: configuration, queue: queue, complete: complete)
+    #else
+      requester.request(request, configuration: configuration, queue: queue, complete: complete)
+    #endif
   }
 
   #if canImport(Combine)
