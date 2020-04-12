@@ -15,6 +15,7 @@ public extension HTTP {
     body(encode).method(.post)
   }
 
+  /// `POST` raw `Data` as the body of the request
   func post(data: Data) -> Builder {
     post { data }
   }
@@ -26,6 +27,7 @@ public extension HTTP {
   }
   #endif
 
+  /// `POST` JSON using the provided `JSONEncoder`.
   func post<JSON: Encodable>(json: JSON, encoder: JSONEncoder = JSONEncoder()) -> Builder {
     content(type: .json).post { try encoder.encode(json) }
   }

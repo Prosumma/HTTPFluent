@@ -13,6 +13,7 @@ import Foundation
 #if canImport(Combine)
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public extension Publisher {
+  /// Maps any error to `HTTPError`
   func mapToHttpError() -> Publishers.MapError<Self, HTTPError> {
     mapError { e in
       switch e {
@@ -24,6 +25,10 @@ public extension Publisher {
 }
 #endif
 
+/**
+ The protocol for a type responsible for
+ making an HTTP request.
+ */
 public protocol HTTPRequester {
   func callAsFunction(_ request: URLRequest, configuration: HTTPConfiguration, queue: DispatchQueue, complete: @escaping HTTPResultComplete<Data>)
   #if canImport(Combine)
@@ -34,6 +39,7 @@ public protocol HTTPRequester {
 
 public struct DefaultHTTPRequester: HTTPRequester {
   public init() {}
+  
   public func callAsFunction(_ request: URLRequest, configuration: HTTPConfiguration, queue: DispatchQueue, complete: @escaping HTTPResultComplete<Data>) {
     let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
       var result: HTTPResult<Data> = .failure(.unknown)
@@ -60,6 +66,7 @@ public struct DefaultHTTPRequester: HTTPRequester {
     }
     task.resume()
   }
+  
   #if canImport(Combine)
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public func publisher(forRequest request: URLRequest, configuration: HTTPConfiguration) -> AnyPublisher<Data, HTTPError> {

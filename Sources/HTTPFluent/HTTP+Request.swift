@@ -8,6 +8,17 @@
 import Foundation
 
 public extension HTTP {
+  /**
+   Perform an HTTP request.
+   
+   The request is actually performed by the underlying `HTTPClient`,
+   which in turn delegates to its `HTTPRequester`. By default,
+   the `complete` callback occurs on a random background queue.
+   This can be changed using the `queue` combinator.
+   
+   - parameter complete: The callback that occurs when
+   the request completes.
+   */
   func request(complete: @escaping HTTPComplete<Wrapper>) {
     let b = builder
     switch b.request {

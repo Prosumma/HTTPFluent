@@ -10,6 +10,33 @@ import Combine
 #endif
 import Foundation
 
+/**
+ Use `HTTPClient` to begin a fluent `HTTP` method chain.
+ 
+ ```swift
+ let client = HTTPClient(baseURL: "http://httpbin.org")
+ 
+ client
+   .path("status/500")
+   .decoding(String.self)
+   .simple
+   .request { s in
+     print(s ?? "Error")
+   }
+ ```
+ 
+ `HTTPClient` defers to its `HTTPRequester` instance to
+ actually perform an HTTP request. If deterministic
+ unit tests are desired, pass a different `HTTPRequester`.
+ 
+ ```
+ let client = HTTPClient(
+     baseURL: "http://httpbin.org",
+     requester: TestRequester()
+   )
+ ```
+ 
+ */
 public struct HTTPClient: HTTP {
   public let baseURL: String
   public let configuration: HTTPConfiguration
