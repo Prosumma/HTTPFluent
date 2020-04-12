@@ -131,6 +131,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F3E7729D2443965300B98506 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				F38B74A92442958C0087AA2A /* .swiftlint.yml */,
+				OBJ_6 /* Package.swift */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
 		OBJ_35 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,17 +170,15 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
-				F38B74A92442958C0087AA2A /* .swiftlint.yml */,
-				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_35 /* Tests */,
 				OBJ_42 /* Products */,
+				F3E7729D2443965300B98506 /* Configuration */,
 				OBJ_45 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -283,7 +290,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_42 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
