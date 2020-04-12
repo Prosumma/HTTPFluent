@@ -79,3 +79,21 @@ client
 
 The type of the `publisher` property is polymorphic and changes based on the type being decoded. In the above case, it is `AnyPublisher<[Order], HTTPError>`. It is recommended to use HTTPFluent's `decode` method _before_ using the `publisher` property, rather than using the `decode` method from `Combine`, because you will have to do slightly less work with the type system.
 
+### Headers
+
+The `header(_:forName:)` method may be used to set an HTTP header. There are also methods such as `accept`,  `content(type:)` and `authorization(bearer:)` for common headers.
+
+In addition, some other methods implicitly set headers. For example, the `decode(json:)` method also calls `accept("application/json")`, so there is no need to do this yourself. Methods which set an HTTP body will call `content(type:)` if the content-type is known.
+
+```swift
+clent
+  .post(json: orderInfo)
+  .decode(json: Receipt.self)
+  .simple
+  .request { receipt in
+    // Handle the receipt
+  }
+```
+
+In addition to setting the HTTP method to `POST`, the `post(json:)` method calls `content(type: "application/json")` and the `decode(json:)` method calls `accept("application/json")`.
+
