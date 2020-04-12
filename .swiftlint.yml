@@ -1,0 +1,10 @@
+disabled_rules:
+  - identifier_name
+  - line_length
+  - xctfail_message
+opt_in_rules:
+  - indentation_width
+  - missing_docs
+
+indentation_width:
+  indentation_width: 2
