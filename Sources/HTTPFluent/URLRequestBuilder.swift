@@ -5,7 +5,9 @@
 //  Created by Gregory Higley on 4/4/20.
 //
 
+#if canImport(Combine)
 import Combine
+#endif
 import Foundation
 
 public struct URLRequestBuilder<Wrapper: OutputWrapper>: HTTP {
