@@ -21,10 +21,24 @@ public extension HTTP {
   }
 
   #if canImport(Combine)
+
+  /**
+   Encode the body of the request using the given encoder.
+   
+   Be sure to set the Content-Type header of the request
+   appropriately.
+   
+   ```swift
+   client
+     .post(body: something, encoder: XmlEncoder())
+     .content(type: "application/xml;charset=utf-8")
+   ```
+   */
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   func post<Body: Encodable, Encoder: TopLevelEncoder>(body: Body, encoder: Encoder) -> Builder where Encoder.Output == Data {
     post { try encoder.encode(body) }
   }
+
   #endif
 
   /// `POST` JSON using the provided `JSONEncoder`.
@@ -32,7 +46,13 @@ public extension HTTP {
     content(type: .json).post { try encoder.encode(json) }
   }
 
+  /**
+   Post `FormData`.
+   
+   The Content-Type header, including charset and boundary (if needed)
+   is set automatically by this method.
+   */
   func post(form: FormData) -> Builder {
-    content(type: form.contentType).post(data: form.encode())
+    content(type: form.contentType).post { try form.encode() }
   }
 }

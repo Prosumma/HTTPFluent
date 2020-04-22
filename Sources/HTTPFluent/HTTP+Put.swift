@@ -31,6 +31,6 @@ public extension HTTP {
   }
 
   func put(form: FormData) -> Builder {
-    content(type: form.contentType).put(data: form.encode())
+    content(type: form.contentType).put { try form.encode() }
   }
 }

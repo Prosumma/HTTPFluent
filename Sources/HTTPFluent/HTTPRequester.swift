@@ -78,6 +78,8 @@ public extension HTTPRequester {
 
 #endif
 
+/// The default implementation of `HTTPRequester`,
+/// used by `HTTPClient` if no `HTTPRequester` is specified.
 public struct DefaultHTTPRequester: HTTPRequester {
   public init() {}
 

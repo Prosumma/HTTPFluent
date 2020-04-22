@@ -31,6 +31,6 @@ public extension HTTP {
   }
 
   func patch(form: FormData) -> Builder {
-    content(type: form.contentType).patch(data: form.encode())
+    content(type: form.contentType).patch { try form.encode() }
   }
 }

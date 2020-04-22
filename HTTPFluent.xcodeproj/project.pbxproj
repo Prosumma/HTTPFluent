@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		F3E7729F2443B54300B98506 /* String.Encoding+IANA.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E7729E2443B54300B98506 /* String.Encoding+IANA.swift */; };
 		OBJ_100 /* HTTPFluent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "HTTPFluent::HTTPFluent::Product" /* HTTPFluent.framework */; };
 		OBJ_51 /* FormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* FormData.swift */; };
 		OBJ_52 /* HTTP+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* HTTP+Combine.swift */; };
@@ -75,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		F38B74A92442958C0087AA2A /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		F3E7729E2443B54300B98506 /* String.Encoding+IANA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String.Encoding+IANA.swift"; sourceTree = "<group>"; };
 		"HTTPFluent::HTTPFluent::Product" /* HTTPFluent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HTTPFluent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"HTTPFluent::HTTPFluentTests::Product" /* HTTPFluentTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = HTTPFluentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* HTTP+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTP+Combine.swift"; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				OBJ_32 /* Result+OutputWrapper.swift */,
 				OBJ_33 /* String+Const.swift */,
 				OBJ_34 /* URLRequestBuilder.swift */,
+				F3E7729E2443B54300B98506 /* String.Encoding+IANA.swift */,
 			);
 			name = HTTPFluent;
 			path = Sources/HTTPFluent;
@@ -350,6 +353,7 @@
 				OBJ_69 /* HTTPRequester.swift in Sources */,
 				OBJ_70 /* HTTPResult.swift in Sources */,
 				OBJ_71 /* Option+Throw.swift in Sources */,
+				F3E7729F2443B54300B98506 /* String.Encoding+IANA.swift in Sources */,
 				OBJ_72 /* Optional+OutputWrapper.swift in Sources */,
 				OBJ_73 /* OutputWrapper.swift in Sources */,
 				OBJ_74 /* Result+OutputWrapper.swift in Sources */,
