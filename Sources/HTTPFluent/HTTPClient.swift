@@ -1,69 +1,80 @@
 //
 //  HTTPClient.swift
-//  
+//  HTTPFluent
 //
-//  Created by Gregory Higley on 4/4/20.
+//  Created by Gregory Higley on 2020-05-08.
+//  Copyright © 2020 Prosumma. All rights reserved.
 //
 
-#if canImport(Combine)
 import Combine
-#endif
 import Foundation
 
 /**
- Use `HTTPClient` to begin a fluent `HTTP` method chain.
- 
+ Perform HTTP operations on a base URL.
+
+ Most uses of HTTP at Patron and other organizations
+ perform one or more operations against some API hosted
+ at a specific base URL. `HTTPClient` makes this very
+ easy and natural using a fluent interface.
+
+ This is best illustrated with an example:
+
  ```swift
- let client = HTTPClient(baseURL: "http://httpbin.org")
- 
+ let jwt: String = "...imagine a JWT..."
+ let token = "xyz123"
+ let attendee = Attendee(token: token)
+ let client = HTTPClient(url: "https://api.patron.com/api")
  client
-   .path("status/500")
-   .decoding(String.self)
-   .simple
-   .request { s in
-     print(s ?? "Error")
-   }
+   .path("attendee", token) // api/attendee/xyz123
+   .query(7, forName: "x") // ?x=7
+   .authorization(bearer: jwt)
+   .post(json: attendee)
+   .dataTaskPublisher(decoding: AttendeeResponse.self)
  ```
- 
- `HTTPClient` defers to its `HTTPRequester` instance to
- actually perform an HTTP request. If deterministic
- unit tests are desired, pass a different `HTTPRequester`.
- 
- ```
- let client = HTTPClient(
-     baseURL: "http://httpbin.org",
-     requester: TestRequester()
-   )
- ```
- 
+
+ Under the hood, `HTTPClient` uses `HTTPClient` to perform
+ its requests.
  */
-public struct HTTPClient: HTTP {
-  public let baseURL: String
-  public let configuration: HTTPConfiguration
-  private let requester: HTTPRequester
+public struct HTTPClient {
+  let session: URLSession
+  var builder: URLRequestBuilder
 
-  public init(baseURL: String, configuration: HTTPConfiguration = DefaultHTTPConfiguration(), requester: HTTPRequester = DefaultHTTPRequester()) {
-    self.baseURL = baseURL
-    self.configuration = configuration
-    self.requester = requester
+  public init(builder: URLRequestBuilder, session: URLSession = URLSession(configuration: .ephemeral)) {
+    self.session = session
+    self.builder = builder
   }
 
-  public var builder: URLRequestBuilder<HTTPResult<Data>> {
-    return URLRequestBuilder(client: self)
+  public init(url: URL, session: URLSession = URLSession(configuration: .ephemeral)) {
+    self.init(builder: URLRequestBuilder(url: url), session: session)
   }
 
-  func request(_ request: URLRequest, queue: DispatchQueue, complete: @escaping HTTPResultComplete<Data>) {
-    #if swift(>=5.2)
-      requester(request, configuration: configuration, queue: queue, complete: complete)
-    #else
-      requester.request(request, configuration: configuration, queue: queue, complete: complete)
-    #endif
+  public init(url: String, session: URLSession = URLSession(configuration: .ephemeral)) {
+    self.init(builder: URLRequestBuilder(url: url), session: session)
+  }
+}
+
+extension HTTPClient: HTTPClientProtocol {
+  public var request: Result<URLRequest, HTTPError> {
+    builder.request
   }
 
-  #if canImport(Combine)
-  @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-  func publisher(forRequest request: URLRequest) -> AnyPublisher<Data, HTTPError> {
-    requester.publisher(forRequest: request, configuration: configuration)
+  public var publisher: AnyPublisher<Data, HTTPError> {
+    builder.request.publisher.flatMap { req in
+      return self.session.dataTaskPublisher(for: req).tryMap { (data, response) in
+        guard let response = response as? HTTPURLResponse else {
+          throw HTTPError.unknown
+        }
+        if !(200..<300).contains(response.statusCode) {
+          throw HTTPError.http(response: response, data: data)
+        }
+        return data
+      }.mapToHttpError
+    }.eraseToAnyPublisher()
   }
-  #endif
+
+  public func build(_ apply: (inout URLRequestBuilder) -> Void) -> HTTPClient {
+    var client = self
+    apply(&client.builder)
+    return client
+  }
 }

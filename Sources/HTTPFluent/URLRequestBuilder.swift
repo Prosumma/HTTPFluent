@@ -1,91 +1,112 @@
 //
 //  URLRequestBuilder.swift
-//  
+//  HTTPFluent
 //
-//  Created by Gregory Higley on 4/4/20.
+//  Created by Gregory Higley on 2020-05-08.
+//  Copyright © 2020 Prosumma. All rights reserved.
 //
 
-#if canImport(Combine)
-import Combine
-#endif
 import Foundation
 
-public struct URLRequestBuilder<Wrapper: OutputWrapper>: HTTP {
-  public typealias Output = Wrapper.Output
+public struct URLRequestBuilder {
+  public typealias Apply = (inout Self) -> Void
 
-  let client: HTTPClient
-  let _decode: HTTPDecode<Output>
+  fileprivate var error: HTTPError?
+  fileprivate var components: URLComponents
+  fileprivate var method: String = "GET"
+  fileprivate var headers: [String: String] = [:]
+  fileprivate var body: (() throws -> Data)?
 
-  var _encode: HTTPEncode?
-  var _headers: [String: String] = [:]
-  var _method: HTTPMethod = .get
-  var _path: String?
-  var _query: [URLQueryItem] = []
-  var _queue: DispatchQueue
-
-  public init(client: HTTPClient, decode: @escaping HTTPDecode<Output>) {
-    self._queue = client.configuration.defaultQueue
-    self.client = client
-    self._decode = decode
+  private init(components: URLComponents) {
+    self.components = components
   }
 
-  public init<PreviousWrapper: OutputWrapper>(copy: URLRequestBuilder<PreviousWrapper>, decode: @escaping HTTPDecode<Output>) {
-    self.init(client: copy.client, decode: decode)
-    _encode = copy._encode
-    _headers = copy._headers
-    _method = copy._method
-    _path = copy._path
-    _query = copy._query
-    _queue = copy._queue
+  public init(url: String) {
+    if let tempComponents = URLComponents(string: url) {
+      self.init(components: tempComponents)
+    } else {
+      self.init(components: URLComponents())
+      error = .malformedURL(url)
+    }
   }
 
-  public init<PreviousWrapper: OutputWrapper>(copy: URLRequestBuilder<PreviousWrapper>) where PreviousWrapper.Output == Output {
-    self.init(copy: copy, decode: copy._decode)
+  public init(url: URL) {
+    self.init(url: url.absoluteString)
   }
+}
 
-  public var builder: URLRequestBuilder<Wrapper> {
-    return self
-  }
-
-  public var request: HTTPResult<URLRequest> {
-    guard var components = URLComponents(string: client.baseURL) else {
-      return .failure(.malformedUrl)
+extension URLRequestBuilder: URLRequestBuilderProtocol {
+  public var request: Result<URLRequest, HTTPError> {
+    if let error = error {
+      return .failure(error)
     }
-    if let path = _path {
-      components.percentEncodedPath += "/" + path
-    }
-    if _query.count > 0 {
-      components.queryItems = _query
-    }
-    guard let url = components.url, !url.isFileURL else {
-      return .failure(.malformedUrl)
-    }
+    // The url has been checked already. It's safe to force-unwrap.
+    let url = components.url! //swiftlint:disable:this force_unwrapping
     var request = URLRequest(url: url)
-    request.httpMethod = _method.rawValue
-    if let encode = _encode {
-      do {
-        request.httpBody = try encode()
-      } catch let e as HTTPError {
-        return .failure(e)
-      } catch {
-        return .failure(.encoding(error))
-      }
+    request.url = components.url
+    request.httpMethod = method
+    do {
+      request.httpBody = try body?()
+    } catch {
+      return .failure(.encoding(error))
     }
-    let headers: [String: String] = client.configuration.defaultHeaders.merging(_headers, uniquingKeysWith: { $1 })
-    for (name, value) in headers {
-      request.setValue(value, forHTTPHeaderField: name)
+    for (field, value) in headers {
+      request.setValue(value, forHTTPHeaderField: field)
     }
     return .success(request)
   }
-}
 
-public extension URLRequestBuilder where Output == Data {
-  init(client: HTTPClient) {
-    self.init(client: client, decode: { data in data })
-  }
-  init(baseURL: String) {
-    self.init(client: HTTPClient(baseURL: baseURL))
+  public func build(_ apply: URLRequestBuilder.Apply) -> URLRequestBuilder {
+    var builder = self
+    apply(&builder)
+    return builder
   }
 }
 
+extension URLRequestBuilder {
+  static func buildPort(_ port: UInt) -> URLRequestBuilder.Apply {
+    return { builder in
+      builder.components.port = Int(port)
+    }
+  }
 
+  static func buildPath<Segments: Sequence>(
+    _ segments: Segments
+  ) -> URLRequestBuilder.Apply where Segments.Element == String {
+    return { builder in
+      builder.components.path += "/" + segments.joined(separator: "/")
+    }
+  }
+
+  static func buildQuery(_ value: Any?, forName name: String) -> URLRequestBuilder.Apply {
+    return { builder in
+      var queryItems = builder.components.queryItems ?? []
+      let string: String?
+      if let value = value {
+        string = "\(value)"
+      } else {
+        string = nil
+      }
+      queryItems.append(URLQueryItem(name: name, value: string))
+      builder.components.queryItems = queryItems
+    }
+  }
+
+  static func buildMethod(_ method: String) -> URLRequestBuilder.Apply {
+    return { builder in
+      builder.method = method
+    }
+  }
+
+  static func buildHeader(_ value: String, forField field: String) -> URLRequestBuilder.Apply {
+    return { builder in
+      builder.headers[field] = value
+    }
+  }
+
+  static func buildBody(_ body: @escaping () throws -> Data) -> URLRequestBuilder.Apply {
+    return { builder in
+      builder.body = body
+    }
+  }
+}
