@@ -14,16 +14,11 @@ import Foundation
  Instances may be initialized with a string literal, e.g.,
  `let put: HTTPMethod = "PUT"`.
  */
-public struct HTTPMethod: RawRepresentable & ExpressibleByStringLiteral {
+public struct HTTPMethod: ConstantValue {
   public let rawValue: String
 
   public init?(rawValue: String) {
     self.rawValue = rawValue.uppercased()
-  }
-
-  public init(stringLiteral value: String) {
-    //swiftlint:disable:next force_unwrapping
-    self.init(rawValue: value)!
   }
 }
 

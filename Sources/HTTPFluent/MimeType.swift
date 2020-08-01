@@ -16,20 +16,11 @@ import Foundation
  Instances may be initialized with a string literal, e.g.,
  `let html: MimeType = "text/html"`.
  */
-public struct MimeType: RawRepresentable & ExpressibleByStringLiteral & CustomStringConvertible {
+public struct MimeType: ConstantValue {
   public let rawValue: String
 
   public init?(rawValue: String) {
-    self.rawValue = rawValue.uppercased()
-  }
-
-  public init(stringLiteral value: String) {
-    //swiftlint:disable:next force_unwrapping
-    self.init(rawValue: value)!
-  }
-
-  public var description: String {
-    rawValue
+    self.rawValue = rawValue
   }
 }
 

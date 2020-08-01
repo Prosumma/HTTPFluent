@@ -14,16 +14,15 @@ import Foundation
  Instances may be initialized with a string literal, e.g.,
  `let accept: HTTPHeaderField = "Accept"`.
  */
-public struct HTTPHeaderField: RawRepresentable & ExpressibleByStringLiteral {
+public struct HTTPHeaderField: ConstantValue {
   public let rawValue: String
-
-  public init?(rawValue: String) {
-    self.rawValue = rawValue.uppercased()
+  
+  public var caseInsensitiveRawValue: String {
+    return rawValue.lowercased()
   }
 
-  public init(stringLiteral value: String) {
-    //swiftlint:disable:next force_unwrapping
-    self.init(rawValue: value)!
+  public init?(rawValue: String) {
+    self.rawValue = rawValue
   }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A conforming type may be used to build a `URLRequest`.
 public protocol URLRequestBuilderProtocol {
   /**
    Returns a `Result` wrapping the `URLRequest` built
