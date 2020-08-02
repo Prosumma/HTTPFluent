@@ -70,14 +70,4 @@ public extension URLRequestBuilderProtocol {
   func language(_ lang: String) -> Self {
     header(lang, forField: .language)
   }
-
-  /**
-   Low-level function to set the HTTP body.
-
-   Don't use this. Use higher-level functions like `post(json:)`,
-   which ultimately call this one.
-   */
-  func body(_ body: @escaping () throws -> Data) -> Self {
-    build(URLRequestBuilder.buildBody(body))
-  }
 }

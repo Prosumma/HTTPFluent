@@ -10,6 +10,16 @@ import Combine
 import Foundation
 
 public extension URLRequestBuilderProtocol {
+  /**
+   Low-level function to set the HTTP body.
+
+   Don't use this. Use higher-level functions like `post(json:)`,
+   which ultimately call this one.
+   */
+  func body(_ body: @escaping () throws -> Data) -> Self {
+    build(URLRequestBuilder.buildBody(body))
+  }
+  
   /// Send `Data` without setting an HTTP method.
   func send(data: Data) -> Self {
     body { data }
