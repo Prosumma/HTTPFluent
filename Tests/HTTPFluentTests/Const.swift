@@ -11,6 +11,6 @@ extension String {
   static let httpBin = "https://httpbin.org"
 }
 
-extension HTTPClient {
-  static let bin = HTTPClient(url: .httpBin)
+extension URLClient {
+  static let bin = URLClient(url: .httpBin)
 }

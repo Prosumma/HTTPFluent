@@ -18,7 +18,7 @@ public protocol URLRequestBuilderProtocol {
    will contain an `HTTPError` specifying what went
    wrong.
    */
-  var request: Result<URLRequest, HTTPError> { get }
+  var request: Result<URLRequest, URLError> { get }
 
   /// Supports the fluent interface. Do not call this directly.
   func build(_ apply: URLRequestBuilder.Apply) -> Self

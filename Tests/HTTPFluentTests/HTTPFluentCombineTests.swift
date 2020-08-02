@@ -30,7 +30,7 @@ final class HttpFluentCombineTests: XCTestCase {
     func print(slideshows: Slideshows) {
       Swift.print(slideshows)
     }
-    HTTPClient.bin
+    URLClient.bin
       .path("json")
       .publisher(decoding: Slideshows.self)
       .sink(
@@ -44,7 +44,7 @@ final class HttpFluentCombineTests: XCTestCase {
   func testPostJSONReactively() {
     let e = expectation(description: "http")
     let slide = Slide(title: "Posted Reactively", type: "all")
-    HTTPClient.bin
+    URLClient.bin
       .path("post")
       .post(json: slide)
       .accept(.json)
@@ -59,7 +59,7 @@ final class HttpFluentCombineTests: XCTestCase {
   func testHTTPStatusCodeReactively() {
     let e = expectation(description: "http")
     let statusCode = 500
-    HTTPClient.bin
+    URLClient.bin
       .path("status", statusCode)
       .accept(.json)
       .method(.put)

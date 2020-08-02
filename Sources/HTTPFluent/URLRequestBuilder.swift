@@ -11,7 +11,7 @@ import Foundation
 public struct URLRequestBuilder {
   public typealias Apply = (inout Self) -> Void
 
-  fileprivate var error: HTTPError?
+  fileprivate var error: URLError?
   fileprivate var components: URLComponents
   fileprivate var method: String = "GET"
   fileprivate var headers: [String: String] = [:]
@@ -36,7 +36,7 @@ public struct URLRequestBuilder {
 }
 
 extension URLRequestBuilder: URLRequestBuilderProtocol {
-  public var request: Result<URLRequest, HTTPError> {
+  public var request: Result<URLRequest, URLError> {
     if let error = error {
       return .failure(error)
     }

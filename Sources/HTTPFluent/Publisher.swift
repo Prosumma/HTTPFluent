@@ -18,8 +18,8 @@ public extension Publisher {
     }
   }
 
-  var mapToHttpError: Publishers.MapError<Self, HTTPError> {
-    return mapErrorIfNeeded(HTTPError.error)
+  var mapToURLError: Publishers.MapError<Self, URLError> {
+    return mapErrorIfNeeded(URLError.error)
   }
   
 }

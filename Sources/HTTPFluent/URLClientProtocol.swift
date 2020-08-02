@@ -13,7 +13,7 @@ import Foundation
  Adds the ability to publish a `URLRequest` built using
  `URLRequestBuilderProtocol`.
  */
-public protocol HTTPClientProtocol: URLRequestBuilderProtocol {
+public protocol URLClientProtocol: URLRequestBuilderProtocol {
   /**
    Returns a publisher that wraps a URL session data task for a given URL request.
 
@@ -21,12 +21,12 @@ public protocol HTTPClientProtocol: URLRequestBuilderProtocol {
 
    - returns: A publisher that wraps data for the URL request.
    */
-  var publisher: AnyPublisher<Data, HTTPError> { get }
-  func receive(on queue: DispatchQueue, callback: @escaping (Result<Data, HTTPError>) -> Void)
+  var publisher: AnyPublisher<Data, URLError> { get }
+  func receive(on queue: DispatchQueue, callback: @escaping (Result<Data, URLError>) -> Void)
 }
 
 //swiftlint:disable function_default_parameter_at_end
-public extension HTTPClientProtocol {
+public extension URLClientProtocol {
   /// Returns a publisher that wraps a URL session data task for a given URL request and decode the response with the specified decoder.
   ///
   /// The publisher publishes Reponse when the task completes, or terminates if the task fails with an error.
@@ -37,8 +37,8 @@ public extension HTTPClientProtocol {
   func publisher<Response, Decoder>(
     decoding type: Response.Type = Response.self,
     decoder: Decoder
-  ) -> AnyPublisher<Response, HTTPError> where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
-    publisher.decode(type: type, decoder: decoder).mapErrorIfNeeded(HTTPError.decoding).eraseToAnyPublisher()
+  ) -> AnyPublisher<Response, URLError> where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
+    publisher.decode(type: type, decoder: decoder).mapErrorIfNeeded(URLError.decoding).eraseToAnyPublisher()
   }
 
   /// Returns a publisher that wraps a URL session data task for a given URL request and decode the response with JSONDecoder.
@@ -47,26 +47,26 @@ public extension HTTPClientProtocol {
   /// - Returns: A publisher that wraps a data task for the URL request.
   func publisher<Response: Decodable>(
     decoding type: Response.Type = Response.self
-  ) -> AnyPublisher<Response, HTTPError> {
+  ) -> AnyPublisher<Response, URLError> {
     accept(.json).publisher(decoding: type, decoder: JSONDecoder())
   }
 
-  func stringPublisher(encoding: String.Encoding = .utf8) -> AnyPublisher<String, HTTPError> {
+  func stringPublisher(encoding: String.Encoding = .utf8) -> AnyPublisher<String, URLError> {
     return publisher.tryMap { data in
       guard let string = String(data: data, encoding: encoding) else {
-        throw HTTPError.decoding(nil)
+        throw URLError.decoding(nil)
       }
       return string
     }
-    .mapToHttpError
+    .mapToURLError
     .eraseToAnyPublisher()
   }
   
-  func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Data, HTTPError>) -> Void) {
+  func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Data, URLError>) -> Void) {
     receive(on: queue, callback: callback)
   }
   
-  func receive<Response, Decoder>(decoding type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Response, HTTPError>) -> Void) where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
+  func receive<Response, Decoder>(decoding type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Response, URLError>) -> Void) where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
     let fluent = decoder is JSONDecoder ? accept(.json) : self
     fluent.receive(on: queue) { result in
       callback(result.flatMap { data in
@@ -79,11 +79,11 @@ public extension HTTPClientProtocol {
     }
   }
 
-  func receive<Response>(json type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Response, HTTPError>) -> Void) where Response: Decodable {
+  func receive<Response>(json type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Response, URLError>) -> Void) where Response: Decodable {
     receive(decoding: type, decoder: JSONDecoder(), on: queue, callback: callback)
   }
   
-  func receiveString(encoding: String.Encoding = .utf8, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<String, HTTPError>) -> Void) {
+  func receiveString(encoding: String.Encoding = .utf8, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<String, URLError>) -> Void) {
     receive(on: queue) { result in
       callback(result.flatMap { data in
         if let string = String(data: data, encoding: encoding) {
