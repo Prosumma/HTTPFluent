@@ -67,7 +67,8 @@ public extension HTTPClientProtocol {
   }
   
   func receive<Response, Decoder>(decoding type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Response, HTTPError>) -> Void) where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
-    receive(on: queue) { result in
+    let fluent = decoder is JSONDecoder ? accept(.json) : self
+    fluent.receive(on: queue) { result in
       callback(result.flatMap { data in
         do {
           return try .success(decoder.decode(type, from: data))
