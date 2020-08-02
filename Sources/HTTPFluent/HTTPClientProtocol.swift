@@ -22,6 +22,7 @@ public protocol HTTPClientProtocol: URLRequestBuilderProtocol {
    - returns: A publisher that wraps data for the URL request.
    */
   var publisher: AnyPublisher<Data, HTTPError> { get }
+  func receive(on queue: DispatchQueue, callback: @escaping (Result<Data, HTTPError>) -> Void)
 }
 
 //swiftlint:disable function_default_parameter_at_end
@@ -59,5 +60,37 @@ public extension HTTPClientProtocol {
     }
     .mapToHttpError
     .eraseToAnyPublisher()
+  }
+  
+  func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Data, HTTPError>) -> Void) {
+    receive(on: queue, callback: callback)
+  }
+  
+  func receive<Response, Decoder>(decoding type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Response, HTTPError>) -> Void) where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
+    receive(on: queue) { result in
+      callback(result.flatMap { data in
+        do {
+          return try .success(decoder.decode(type, from: data))
+        } catch {
+          return .failure(.decoding(error))
+        }
+      })
+    }
+  }
+
+  func receive<Response>(json type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Response, HTTPError>) -> Void) where Response: Decodable {
+    receive(decoding: type, decoder: JSONDecoder(), on: queue, callback: callback)
+  }
+  
+  func receiveString(encoding: String.Encoding = .utf8, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<String, HTTPError>) -> Void) {
+    receive(on: queue) { result in
+      callback(result.flatMap { data in
+        if let string = String(data: data, encoding: encoding) {
+          return .success(string)
+        } else {
+          return .failure(.decoding(nil))
+        }
+      })
+    }
   }
 }

@@ -71,7 +71,30 @@ extension HTTPClient: HTTPClientProtocol {
       }.mapToHttpError
     }.eraseToAnyPublisher()
   }
-
+  
+  public func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Data, HTTPError>) -> Void) {
+    switch builder.request {
+    case .failure(let error):
+      queue.async { callback(.failure(error)) }
+    case .success(let request):
+      let task = session.dataTask(with: request) { (data, response, error) in
+        var result: Result<Data, HTTPError> = .failure(.unknown)
+        defer { queue.async { callback(result) } }
+        if let error = error {
+          return result = .failure(.error(error))
+        }
+        guard let response = response as? HTTPURLResponse, let data = data else {
+          return result = .failure(.unknown)
+        }
+        if !(200..<300).contains(response.statusCode) {
+          return result = .failure(.http(response: response, data: data))
+        }
+        result = .success(data)
+      }
+      task.resume()
+    }
+  }
+    
   public func build(_ apply: (inout URLRequestBuilder) -> Void) -> HTTPClient {
     var client = self
     apply(&client.builder)
