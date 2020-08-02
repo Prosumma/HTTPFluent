@@ -22,7 +22,7 @@ public protocol URLClientProtocol: URLRequestBuilderProtocol {
    - returns: A publisher that wraps data for the URL request.
    */
   var publisher: AnyPublisher<Data, URLError> { get }
-  func receive(on queue: DispatchQueue, callback: @escaping (Result<Data, URLError>) -> Void)
+  func receive(on queue: DispatchQueue, callback: @escaping (URLResult<Data>) -> Void)
 }
 
 //swiftlint:disable function_default_parameter_at_end
@@ -62,11 +62,11 @@ public extension URLClientProtocol {
     .eraseToAnyPublisher()
   }
   
-  func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Data, URLError>) -> Void) {
+  func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (URLResult<Data>) -> Void) {
     receive(on: queue, callback: callback)
   }
   
-  func receive<Response, Decoder>(decoding type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Response, URLError>) -> Void) where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
+  func receive<Response, Decoder>(decoding type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (URLResult<Response>) -> Void) where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
     let fluent = decoder is JSONDecoder ? accept(.json) : self
     fluent.receive(on: queue) { result in
       callback(result.flatMap { data in
@@ -79,11 +79,11 @@ public extension URLClientProtocol {
     }
   }
 
-  func receive<Response>(json type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Response, URLError>) -> Void) where Response: Decodable {
+  func receive<Response>(json type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (URLResult<Response>) -> Void) where Response: Decodable {
     receive(decoding: type, decoder: JSONDecoder(), on: queue, callback: callback)
   }
   
-  func receiveString(encoding: String.Encoding = .utf8, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<String, URLError>) -> Void) {
+  func receiveString(encoding: String.Encoding = .utf8, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (URLResult<String>) -> Void) {
     receive(on: queue) { result in
       callback(result.flatMap { data in
         if let string = String(data: data, encoding: encoding) {

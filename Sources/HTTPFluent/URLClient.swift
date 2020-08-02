@@ -65,12 +65,12 @@ public struct URLClient {
 }
 
 extension URLClient: URLClientProtocol {
-  public var request: Result<URLRequest, URLError> {
+  public var request: URLResult<URLRequest> {
     builder.request
   }
 
   public var publisher: AnyPublisher<Data, URLError> {
-    builder.request.publisher.flatMap { req in
+    request.publisher.flatMap { req in
       self.session
         .dataTaskPublisher(for: req)
         .tryMap { try self.responseHandler($0, $1) }
@@ -78,13 +78,13 @@ extension URLClient: URLClientProtocol {
     }.eraseToAnyPublisher()
   }
   
-  public func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (Result<Data, URLError>) -> Void) {
-    switch builder.request {
+  public func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (URLResult<Data>) -> Void) {
+    switch request {
     case .failure(let error):
       queue.async { callback(.failure(error)) }
     case .success(let request):
       let task = session.dataTask(with: request) { (data, response, error) in
-        var result: Result<Data, URLError> = .failure(.unknown)
+        var result: URLResult<Data> = .failure(.unknown)
         defer { queue.async { callback(result) } }
         if let error = error {
           return result = .failure(.error(error))

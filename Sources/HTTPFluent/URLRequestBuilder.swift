@@ -36,7 +36,7 @@ public struct URLRequestBuilder {
 }
 
 extension URLRequestBuilder: URLRequestBuilderProtocol {
-  public var request: Result<URLRequest, URLError> {
+  public var request: URLResult<URLRequest> {
     if let error = error {
       return .failure(error)
     }
