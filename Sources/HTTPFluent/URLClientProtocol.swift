@@ -79,7 +79,7 @@ public extension URLClientProtocol {
     }
   }
 
-  func receive<Response>(json type: Response.Type = Response.self, decoder: Decoder, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (URLResult<Response>) -> Void) where Response: Decodable {
+  func receive<Response>(json type: Response.Type = Response.self, on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (URLResult<Response>) -> Void) where Response: Decodable {
     receive(decoding: type, decoder: JSONDecoder(), on: queue, callback: callback)
   }
   
