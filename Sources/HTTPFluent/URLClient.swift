@@ -6,7 +6,10 @@
 //  Copyright © 2020 Prosumma. All rights reserved.
 //
 
+#if canImport(Combine)
 import Combine
+#endif
+
 import Foundation
 
 /**
@@ -69,6 +72,7 @@ extension URLClient: URLClientProtocol {
     builder.request
   }
 
+  @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public var publisher: AnyPublisher<Data, URLError> {
     request.publisher.flatMap { req in
       self.session

@@ -1,0 +1,70 @@
+//
+//  URLClientProtocol+Receive.swift
+//  HTTPFluent
+//
+//  Created by Gregory Higley on 8/12/20.
+//
+
+#if canImport(Combine)
+import Combine
+#endif
+
+import Foundation
+
+//swiftlint:disable function_default_parameter_at_end
+public extension URLClientProtocol {
+  
+  /**
+   Executes the underlying `URLRequest` and calls `callback` on the given `queue` when it
+   completes.
+   
+   The `queue` defaults to a random global `DispatchQueue`.
+   */
+  func receive(
+    on queue: DispatchQueue = DispatchQueue.global(),
+    callback: @escaping (URLResult<Data>) -> Void)
+  {
+    receive(on: queue, callback: callback)
+  }
+  
+  /**
+   Executes the underlying `URLRequest` and calls `callback` on the given `queue` when it
+   completes, passing `Data` through the `decode` function to give the `Response`.
+   
+   The `queue` defaults to a random global `DispatchQueue`.
+   */
+  func receive<Response>(
+    on queue: DispatchQueue = DispatchQueue.global(),
+    decode: @escaping Decoders.Decode<Response>,
+    callback: @escaping (URLResult<Response>) -> Void
+  ) {
+    receive(on: queue) { result in
+      do {
+        try callback(.success(decode(result.get())))
+      } catch let error as URLError {
+        callback(.failure(error))
+      } catch {
+        callback(.failure(.decoding(error)))
+      }
+    }
+  }
+    
+  func receive<Response, Decoder>(
+    decoding type: Response.Type = Response.self,
+    decoder: Decoder,
+    on queue: DispatchQueue = DispatchQueue.global(),
+    callback: @escaping (URLResult<Response>) -> Void
+  ) where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
+    let fluent = decoder is JSONDecoder ? accept(.json) : self
+    return fluent.receive(on: queue, decode: Decoders.decode(type, with: decoder), callback: callback)
+  }
+
+  func receive<Response>(
+    json type: Response.Type = Response.self,
+    on queue: DispatchQueue = DispatchQueue.global(),
+    callback: @escaping (URLResult<Response>) -> Void
+  ) where Response: Decodable {
+    receive(on: queue, decode: Decoders.json(type), callback: callback)
+  }
+}
+

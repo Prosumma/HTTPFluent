@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// An error that may occurs as a result of constructing or publishing a `URLRequest` over HTTP.
+/// An error that may occur as a result of constructing or publishing a `URLRequest`.
 public enum URLError: Error {
   case error(Error?)
   case malformedURL(String?)

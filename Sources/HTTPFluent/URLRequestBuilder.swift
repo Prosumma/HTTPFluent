@@ -64,7 +64,7 @@ extension URLRequestBuilder: URLRequestBuilderProtocol {
 }
 
 extension URLRequestBuilder {
-  static func buildPort(_ port: UInt) -> URLRequestBuilder.Apply {
+  static func buildPort(_ port: UInt) -> Apply {
     return { builder in
       builder.components.port = Int(port)
     }
@@ -78,7 +78,7 @@ extension URLRequestBuilder {
     }
   }
 
-  static func buildQuery(_ value: Any?, forName name: String) -> URLRequestBuilder.Apply {
+  static func buildQuery(_ value: Any?, forName name: String) -> Apply {
     return { builder in
       var queryItems = builder.components.queryItems ?? []
       let string: String?

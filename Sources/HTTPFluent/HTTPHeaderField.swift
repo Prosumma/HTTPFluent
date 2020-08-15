@@ -16,13 +16,8 @@ import Foundation
  */
 public struct HTTPHeaderField: ConstantValue {
   public let rawValue: String
-  
-  public var caseInsensitiveRawValue: String {
-    return rawValue.lowercased()
-  }
-
-  public init?(rawValue: String) {
-    self.rawValue = rawValue
+  public init(constantValue value: String) {
+    rawValue = value
   }
 }
 

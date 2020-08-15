@@ -18,9 +18,8 @@ import Foundation
  */
 public struct MimeType: ConstantValue {
   public let rawValue: String
-
-  public init?(rawValue: String) {
-    self.rawValue = rawValue
+  public init(constantValue value: String) {
+    rawValue = value
   }
 }
 

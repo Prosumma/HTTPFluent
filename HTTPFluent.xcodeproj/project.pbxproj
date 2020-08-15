@@ -9,11 +9,11 @@
 /* Begin PBXAggregateTarget section */
 		"HTTPFluent::HTTPFluentPackageTests::ProductTarget" /* HTTPFluentPackageTests */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_67 /* Build configuration list for PBXAggregateTarget "HTTPFluentPackageTests" */;
+			buildConfigurationList = OBJ_64 /* Build configuration list for PBXAggregateTarget "HTTPFluentPackageTests" */;
 			buildPhases = (
 			);
 			dependencies = (
-				OBJ_70 /* PBXTargetDependency */,
+				OBJ_67 /* PBXTargetDependency */,
 			);
 			name = HTTPFluentPackageTests;
 			productName = HTTPFluentPackageTests;
@@ -21,39 +21,43 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		F35FBD3324BD43AC00B90259 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35FBD3224BD43AC00B90259 /* Publisher.swift */; };
-		OBJ_43 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* HTTPClient.swift */; };
-		OBJ_44 /* HTTPClientProtocol+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* HTTPClientProtocol+Combine.swift */; };
-		OBJ_46 /* HTTPClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* HTTPClientProtocol.swift */; };
-		OBJ_47 /* DynamicCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* DynamicCodingKey.swift */; };
-		OBJ_48 /* FormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* FormData.swift */; };
-		OBJ_49 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* HTTPError.swift */; };
-		OBJ_50 /* HTTPHeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* HTTPHeaderField.swift */; };
-		OBJ_51 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* HTTPMethod.swift */; };
-		OBJ_52 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* MimeType.swift */; };
-		OBJ_53 /* NestedDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* NestedDecodable.swift */; };
-		OBJ_54 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* URLRequestBuilder.swift */; };
-		OBJ_55 /* URLRequestBuilderProtocol+HTTPBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* URLRequestBuilderProtocol+HTTPBody.swift */; };
-		OBJ_56 /* URLRequestBuilderProtocol+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* URLRequestBuilderProtocol+URL.swift */; };
-		OBJ_57 /* URLRequestBuilderProtocol+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* URLRequestBuilderProtocol+URLRequest.swift */; };
-		OBJ_58 /* URLRequestBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* URLRequestBuilderProtocol.swift */; };
-		OBJ_65 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_76 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Const.swift */; };
-		OBJ_77 /* HTTPBinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* HTTPBinResponse.swift */; };
-		OBJ_78 /* HTTPFluentCombineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* HTTPFluentCombineTests.swift */; };
-		OBJ_80 /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Slide.swift */; };
-		OBJ_82 /* HTTPFluent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "HTTPFluent::HTTPFluent::Product" /* HTTPFluent.framework */; };
+		F301735024E413DA00FEFE38 /* URLClientProtocol+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301734F24E413DA00FEFE38 /* URLClientProtocol+Combine.swift */; };
+		F301735224E4146500FEFE38 /* URLClientProtocol+Receive.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301735124E4146500FEFE38 /* URLClientProtocol+Receive.swift */; };
+		F301735424E415C400FEFE38 /* Combine+Shim.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301735324E415C400FEFE38 /* Combine+Shim.swift */; };
+		F301735624E4180000FEFE38 /* HTTPFluentReceiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301735524E4180000FEFE38 /* HTTPFluentReceiveTests.swift */; };
+		F3EBB64924E207A900710514 /* Decoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EBB64824E207A900710514 /* Decoders.swift */; };
+		OBJ_41 /* ConstantValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ConstantValue.swift */; };
+		OBJ_42 /* FormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* FormData.swift */; };
+		OBJ_43 /* HTTPHeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* HTTPHeaderField.swift */; };
+		OBJ_44 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* HTTPMethod.swift */; };
+		OBJ_45 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* MimeType.swift */; };
+		OBJ_46 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Publisher.swift */; };
+		OBJ_47 /* URLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* URLClient.swift */; };
+		OBJ_48 /* URLClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* URLClientProtocol.swift */; };
+		OBJ_49 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* URLError.swift */; };
+		OBJ_50 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* URLRequestBuilder.swift */; };
+		OBJ_51 /* URLRequestBuilderProtocol+HTTPBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* URLRequestBuilderProtocol+HTTPBody.swift */; };
+		OBJ_52 /* URLRequestBuilderProtocol+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* URLRequestBuilderProtocol+URL.swift */; };
+		OBJ_53 /* URLRequestBuilderProtocol+URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* URLRequestBuilderProtocol+URLRequest.swift */; };
+		OBJ_54 /* URLRequestBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* URLRequestBuilderProtocol.swift */; };
+		OBJ_55 /* URLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* URLResult.swift */; };
+		OBJ_62 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_73 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Const.swift */; };
+		OBJ_74 /* HTTPBinResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* HTTPBinResponse.swift */; };
+		OBJ_75 /* HTTPFluentCombineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* HTTPFluentCombineTests.swift */; };
+		OBJ_76 /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Slide.swift */; };
+		OBJ_78 /* HTTPFluent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "HTTPFluent::HTTPFluent::Product" /* HTTPFluent.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F35FBD3024BD2C1C00B90259 /* PBXContainerItemProxy */ = {
+		F3EBB64424E2054600710514 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "HTTPFluent::HTTPFluent";
 			remoteInfo = HTTPFluent;
 		};
-		F35FBD3124BD2C1D00B90259 /* PBXContainerItemProxy */ = {
+		F3EBB64724E207A000710514 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -63,78 +67,83 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F35FBD3224BD43AC00B90259 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
+		F301734F24E413DA00FEFE38 /* URLClientProtocol+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLClientProtocol+Combine.swift"; sourceTree = "<group>"; };
+		F301735124E4146500FEFE38 /* URLClientProtocol+Receive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLClientProtocol+Receive.swift"; sourceTree = "<group>"; };
+		F301735324E415C400FEFE38 /* Combine+Shim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Shim.swift"; sourceTree = "<group>"; };
+		F301735524E4180000FEFE38 /* HTTPFluentReceiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPFluentReceiveTests.swift; sourceTree = "<group>"; };
+		F3EBB64824E207A900710514 /* Decoders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoders.swift; sourceTree = "<group>"; };
 		"HTTPFluent::HTTPFluent::Product" /* HTTPFluent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HTTPFluent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"HTTPFluent::HTTPFluentTests::Product" /* HTTPFluentTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = HTTPFluentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_10 /* HTTPClientProtocol+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPClientProtocol+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_12 /* HTTPClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientProtocol.swift; sourceTree = "<group>"; };
-		OBJ_13 /* DynamicCodingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicCodingKey.swift; sourceTree = "<group>"; };
-		OBJ_14 /* FormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormData.swift; sourceTree = "<group>"; };
-		OBJ_15 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
-		OBJ_16 /* HTTPHeaderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderField.swift; sourceTree = "<group>"; };
-		OBJ_17 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		OBJ_18 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
-		OBJ_19 /* NestedDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedDecodable.swift; sourceTree = "<group>"; };
-		OBJ_20 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
-		OBJ_21 /* URLRequestBuilderProtocol+HTTPBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequestBuilderProtocol+HTTPBody.swift"; sourceTree = "<group>"; };
-		OBJ_22 /* URLRequestBuilderProtocol+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequestBuilderProtocol+URL.swift"; sourceTree = "<group>"; };
-		OBJ_23 /* URLRequestBuilderProtocol+URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequestBuilderProtocol+URLRequest.swift"; sourceTree = "<group>"; };
-		OBJ_24 /* URLRequestBuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderProtocol.swift; sourceTree = "<group>"; };
-		OBJ_27 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
-		OBJ_28 /* HTTPBinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPBinResponse.swift; sourceTree = "<group>"; };
-		OBJ_29 /* HTTPFluentCombineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPFluentCombineTests.swift; sourceTree = "<group>"; };
-		OBJ_31 /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
-		OBJ_35 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		OBJ_36 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		OBJ_37 /* HTTPFluent.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = HTTPFluent.podspec; sourceTree = "<group>"; };
+		OBJ_10 /* FormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormData.swift; sourceTree = "<group>"; };
+		OBJ_11 /* HTTPHeaderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderField.swift; sourceTree = "<group>"; };
+		OBJ_12 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		OBJ_13 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
+		OBJ_14 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
+		OBJ_15 /* URLClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLClient.swift; sourceTree = "<group>"; };
+		OBJ_16 /* URLClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLClientProtocol.swift; sourceTree = "<group>"; };
+		OBJ_17 /* URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
+		OBJ_18 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
+		OBJ_19 /* URLRequestBuilderProtocol+HTTPBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequestBuilderProtocol+HTTPBody.swift"; sourceTree = "<group>"; };
+		OBJ_20 /* URLRequestBuilderProtocol+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequestBuilderProtocol+URL.swift"; sourceTree = "<group>"; };
+		OBJ_21 /* URLRequestBuilderProtocol+URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequestBuilderProtocol+URLRequest.swift"; sourceTree = "<group>"; };
+		OBJ_22 /* URLRequestBuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderProtocol.swift; sourceTree = "<group>"; };
+		OBJ_23 /* URLResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResult.swift; sourceTree = "<group>"; };
+		OBJ_26 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		OBJ_27 /* HTTPBinResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPBinResponse.swift; sourceTree = "<group>"; };
+		OBJ_28 /* HTTPFluentCombineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPFluentCombineTests.swift; sourceTree = "<group>"; };
+		OBJ_29 /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
+		OBJ_33 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		OBJ_34 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_35 /* HTTPFluent.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = HTTPFluent.podspec; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		OBJ_9 /* ConstantValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_59 /* Frameworks */ = {
+		OBJ_56 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_81 /* Frameworks */ = {
+		OBJ_77 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_82 /* HTTPFluent.framework in Frameworks */,
+				OBJ_78 /* HTTPFluent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		OBJ_25 /* Tests */ = {
+		OBJ_24 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_26 /* HTTPFluentTests */,
+				OBJ_25 /* HTTPFluentTests */,
 			);
 			name = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_26 /* HTTPFluentTests */ = {
+		OBJ_25 /* HTTPFluentTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_27 /* Const.swift */,
-				OBJ_28 /* HTTPBinResponse.swift */,
-				OBJ_29 /* HTTPFluentCombineTests.swift */,
-				OBJ_31 /* Slide.swift */,
+				OBJ_26 /* Const.swift */,
+				OBJ_27 /* HTTPBinResponse.swift */,
+				OBJ_28 /* HTTPFluentCombineTests.swift */,
+				F301735524E4180000FEFE38 /* HTTPFluentReceiveTests.swift */,
+				OBJ_29 /* Slide.swift */,
 			);
 			name = HTTPFluentTests;
 			path = Tests/HTTPFluentTests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_32 /* Products */ = {
+		OBJ_30 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				"HTTPFluent::HTTPFluentTests::Product" /* HTTPFluentTests.xctest */,
 				"HTTPFluent::HTTPFluent::Product" /* HTTPFluent.framework */,
+				"HTTPFluent::HTTPFluentTests::Product" /* HTTPFluentTests.xctest */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -144,11 +153,11 @@
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_25 /* Tests */,
-				OBJ_32 /* Products */,
-				OBJ_35 /* LICENSE */,
-				OBJ_36 /* README.md */,
-				OBJ_37 /* HTTPFluent.podspec */,
+				OBJ_24 /* Tests */,
+				OBJ_30 /* Products */,
+				OBJ_33 /* LICENSE */,
+				OBJ_34 /* README.md */,
+				OBJ_35 /* HTTPFluent.podspec */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,22 +172,25 @@
 		OBJ_8 /* HTTPFluent */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_13 /* DynamicCodingKey.swift */,
-				OBJ_14 /* FormData.swift */,
-				OBJ_9 /* HTTPClient.swift */,
-				OBJ_12 /* HTTPClientProtocol.swift */,
-				OBJ_10 /* HTTPClientProtocol+Combine.swift */,
-				OBJ_15 /* HTTPError.swift */,
-				OBJ_16 /* HTTPHeaderField.swift */,
-				OBJ_17 /* HTTPMethod.swift */,
-				OBJ_18 /* MimeType.swift */,
-				OBJ_19 /* NestedDecodable.swift */,
-				F35FBD3224BD43AC00B90259 /* Publisher.swift */,
-				OBJ_20 /* URLRequestBuilder.swift */,
-				OBJ_24 /* URLRequestBuilderProtocol.swift */,
-				OBJ_21 /* URLRequestBuilderProtocol+HTTPBody.swift */,
-				OBJ_22 /* URLRequestBuilderProtocol+URL.swift */,
-				OBJ_23 /* URLRequestBuilderProtocol+URLRequest.swift */,
+				F301735324E415C400FEFE38 /* Combine+Shim.swift */,
+				OBJ_9 /* ConstantValue.swift */,
+				F3EBB64824E207A900710514 /* Decoders.swift */,
+				OBJ_10 /* FormData.swift */,
+				OBJ_11 /* HTTPHeaderField.swift */,
+				OBJ_12 /* HTTPMethod.swift */,
+				OBJ_13 /* MimeType.swift */,
+				OBJ_14 /* Publisher.swift */,
+				OBJ_15 /* URLClient.swift */,
+				OBJ_16 /* URLClientProtocol.swift */,
+				F301734F24E413DA00FEFE38 /* URLClientProtocol+Combine.swift */,
+				F301735124E4146500FEFE38 /* URLClientProtocol+Receive.swift */,
+				OBJ_17 /* URLError.swift */,
+				OBJ_18 /* URLRequestBuilder.swift */,
+				OBJ_22 /* URLRequestBuilderProtocol.swift */,
+				OBJ_19 /* URLRequestBuilderProtocol+HTTPBody.swift */,
+				OBJ_20 /* URLRequestBuilderProtocol+URL.swift */,
+				OBJ_21 /* URLRequestBuilderProtocol+URLRequest.swift */,
+				OBJ_23 /* URLResult.swift */,
 			);
 			name = HTTPFluent;
 			path = Sources/HTTPFluent;
@@ -189,10 +201,10 @@
 /* Begin PBXNativeTarget section */
 		"HTTPFluent::HTTPFluent" /* HTTPFluent */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_39 /* Build configuration list for PBXNativeTarget "HTTPFluent" */;
+			buildConfigurationList = OBJ_37 /* Build configuration list for PBXNativeTarget "HTTPFluent" */;
 			buildPhases = (
-				OBJ_42 /* Sources */,
-				OBJ_59 /* Frameworks */,
+				OBJ_40 /* Sources */,
+				OBJ_56 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -205,15 +217,15 @@
 		};
 		"HTTPFluent::HTTPFluentTests" /* HTTPFluentTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_72 /* Build configuration list for PBXNativeTarget "HTTPFluentTests" */;
+			buildConfigurationList = OBJ_69 /* Build configuration list for PBXNativeTarget "HTTPFluentTests" */;
 			buildPhases = (
-				OBJ_75 /* Sources */,
-				OBJ_81 /* Frameworks */,
+				OBJ_72 /* Sources */,
+				OBJ_77 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_83 /* PBXTargetDependency */,
+				OBJ_79 /* PBXTargetDependency */,
 			);
 			name = HTTPFluentTests;
 			productName = HTTPFluentTests;
@@ -222,9 +234,9 @@
 		};
 		"HTTPFluent::SwiftPMPackageDescription" /* HTTPFluentPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_61 /* Build configuration list for PBXNativeTarget "HTTPFluentPackageDescription" */;
+			buildConfigurationList = OBJ_58 /* Build configuration list for PBXNativeTarget "HTTPFluentPackageDescription" */;
 			buildPhases = (
-				OBJ_64 /* Sources */,
+				OBJ_61 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -251,7 +263,7 @@
 				en,
 			);
 			mainGroup = OBJ_5;
-			productRefGroup = OBJ_32 /* Products */;
+			productRefGroup = OBJ_30 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -264,60 +276,64 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_42 /* Sources */ = {
+		OBJ_40 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_43 /* HTTPClient.swift in Sources */,
-				OBJ_44 /* HTTPClientProtocol+Combine.swift in Sources */,
-				OBJ_46 /* HTTPClientProtocol.swift in Sources */,
-				OBJ_47 /* DynamicCodingKey.swift in Sources */,
-				OBJ_48 /* FormData.swift in Sources */,
-				OBJ_49 /* HTTPError.swift in Sources */,
-				OBJ_50 /* HTTPHeaderField.swift in Sources */,
-				OBJ_51 /* HTTPMethod.swift in Sources */,
-				OBJ_52 /* MimeType.swift in Sources */,
-				F35FBD3324BD43AC00B90259 /* Publisher.swift in Sources */,
-				OBJ_53 /* NestedDecodable.swift in Sources */,
-				OBJ_54 /* URLRequestBuilder.swift in Sources */,
-				OBJ_55 /* URLRequestBuilderProtocol+HTTPBody.swift in Sources */,
-				OBJ_56 /* URLRequestBuilderProtocol+URL.swift in Sources */,
-				OBJ_57 /* URLRequestBuilderProtocol+URLRequest.swift in Sources */,
-				OBJ_58 /* URLRequestBuilderProtocol.swift in Sources */,
+				OBJ_41 /* ConstantValue.swift in Sources */,
+				OBJ_42 /* FormData.swift in Sources */,
+				F301735424E415C400FEFE38 /* Combine+Shim.swift in Sources */,
+				F301735224E4146500FEFE38 /* URLClientProtocol+Receive.swift in Sources */,
+				F301735024E413DA00FEFE38 /* URLClientProtocol+Combine.swift in Sources */,
+				OBJ_43 /* HTTPHeaderField.swift in Sources */,
+				OBJ_44 /* HTTPMethod.swift in Sources */,
+				OBJ_45 /* MimeType.swift in Sources */,
+				OBJ_46 /* Publisher.swift in Sources */,
+				OBJ_47 /* URLClient.swift in Sources */,
+				OBJ_48 /* URLClientProtocol.swift in Sources */,
+				OBJ_49 /* URLError.swift in Sources */,
+				OBJ_50 /* URLRequestBuilder.swift in Sources */,
+				OBJ_51 /* URLRequestBuilderProtocol+HTTPBody.swift in Sources */,
+				OBJ_52 /* URLRequestBuilderProtocol+URL.swift in Sources */,
+				OBJ_53 /* URLRequestBuilderProtocol+URLRequest.swift in Sources */,
+				OBJ_54 /* URLRequestBuilderProtocol.swift in Sources */,
+				OBJ_55 /* URLResult.swift in Sources */,
+				F3EBB64924E207A900710514 /* Decoders.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_64 /* Sources */ = {
+		OBJ_61 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_65 /* Package.swift in Sources */,
+				OBJ_62 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_75 /* Sources */ = {
+		OBJ_72 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_76 /* Const.swift in Sources */,
-				OBJ_77 /* HTTPBinResponse.swift in Sources */,
-				OBJ_78 /* HTTPFluentCombineTests.swift in Sources */,
-				OBJ_80 /* Slide.swift in Sources */,
+				F301735624E4180000FEFE38 /* HTTPFluentReceiveTests.swift in Sources */,
+				OBJ_73 /* Const.swift in Sources */,
+				OBJ_74 /* HTTPBinResponse.swift in Sources */,
+				OBJ_75 /* HTTPFluentCombineTests.swift in Sources */,
+				OBJ_76 /* Slide.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_70 /* PBXTargetDependency */ = {
+		OBJ_67 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "HTTPFluent::HTTPFluentTests" /* HTTPFluentTests */;
-			targetProxy = F35FBD3124BD2C1D00B90259 /* PBXContainerItemProxy */;
+			targetProxy = F3EBB64724E207A000710514 /* PBXContainerItemProxy */;
 		};
-		OBJ_83 /* PBXTargetDependency */ = {
+		OBJ_79 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "HTTPFluent::HTTPFluent" /* HTTPFluent */;
-			targetProxy = F35FBD3024BD2C1C00B90259 /* PBXContainerItemProxy */;
+			targetProxy = F3EBB64424E2054600710514 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -349,6 +365,62 @@
 			};
 			name = Debug;
 		};
+		OBJ_38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = HTTPFluent.xcodeproj/HTTPFluent_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = HTTPFluent;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = HTTPFluent;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		OBJ_39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = HTTPFluent.xcodeproj/HTTPFluent_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = HTTPFluent;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = HTTPFluent;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
 		OBJ_4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -373,63 +445,7 @@
 			};
 			name = Release;
 		};
-		OBJ_40 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = HTTPFluent.xcodeproj/HTTPFluent_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = HTTPFluent;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = HTTPFluent;
-				TVOS_DEPLOYMENT_TARGET = 13.0;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
-			};
-			name = Debug;
-		};
-		OBJ_41 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = HTTPFluent.xcodeproj/HTTPFluent_Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = HTTPFluent;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = HTTPFluent;
-				TVOS_DEPLOYMENT_TARGET = 13.0;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
-			};
-			name = Release;
-		};
-		OBJ_62 /* Debug */ = {
+		OBJ_59 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -438,7 +454,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_63 /* Release */ = {
+		OBJ_60 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -447,19 +463,19 @@
 			};
 			name = Release;
 		};
-		OBJ_68 /* Debug */ = {
+		OBJ_65 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		OBJ_69 /* Release */ = {
+		OBJ_66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Release;
 		};
-		OBJ_73 /* Debug */ = {
+		OBJ_70 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -484,7 +500,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_74 /* Release */ = {
+		OBJ_71 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -521,38 +537,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_39 /* Build configuration list for PBXNativeTarget "HTTPFluent" */ = {
+		OBJ_37 /* Build configuration list for PBXNativeTarget "HTTPFluent" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_40 /* Debug */,
-				OBJ_41 /* Release */,
+				OBJ_38 /* Debug */,
+				OBJ_39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_61 /* Build configuration list for PBXNativeTarget "HTTPFluentPackageDescription" */ = {
+		OBJ_58 /* Build configuration list for PBXNativeTarget "HTTPFluentPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_62 /* Debug */,
-				OBJ_63 /* Release */,
+				OBJ_59 /* Debug */,
+				OBJ_60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_67 /* Build configuration list for PBXAggregateTarget "HTTPFluentPackageTests" */ = {
+		OBJ_64 /* Build configuration list for PBXAggregateTarget "HTTPFluentPackageTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_68 /* Debug */,
-				OBJ_69 /* Release */,
+				OBJ_65 /* Debug */,
+				OBJ_66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_72 /* Build configuration list for PBXNativeTarget "HTTPFluentTests" */ = {
+		OBJ_69 /* Build configuration list for PBXNativeTarget "HTTPFluentTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_73 /* Debug */,
-				OBJ_74 /* Release */,
+				OBJ_70 /* Debug */,
+				OBJ_71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

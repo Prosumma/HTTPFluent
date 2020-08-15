@@ -23,53 +23,52 @@ func fulfill<E: Error>(_ e: XCTestExpectation, expectError: Bool = false) -> (Su
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 final class HttpFluentCombineTests: XCTestCase {
-  var cancellables: Set<AnyCancellable> = []
 
-  func testGetJSONReactively() {
+  func testGetJSON() {
     let e = expectation(description: "http")
     func print(slideshows: Slideshows) {
       Swift.print(slideshows)
     }
-    URLClient.bin
+    let cancellable = URLClient.bin
       .path("json")
-      .publisher(decoding: Slideshows.self)
+      .publisher(json: Slideshows.self)
       .sink(
         receiveCompletion: fulfill(e),
         receiveValue: print(slideshows:)
       )
-      .store(in: &cancellables)
     wait(for: [e], timeout: 10)
+    cancellable.cancel()
   }
 
-  func testPostJSONReactively() {
+  func testPostJSON() {
     let e = expectation(description: "http")
     let slide = Slide(title: "Posted Reactively", type: "all")
-    URLClient.bin
+    let cancellable = URLClient.bin
       .path("post")
       .post(json: slide)
       .accept(.json)
-      .stringPublisher()
+      .publisher(decode: Decoders.string)
       .sink(receiveCompletion: fulfill(e)) { s in
         print(s)
       }
-      .store(in: &cancellables)
     wait(for: [e], timeout: 10)
+    cancellable.cancel()
   }
 
-  func testHTTPStatusCodeReactively() {
+  func testHTTPStatusCode() {
     let e = expectation(description: "http")
     let statusCode = 500
-    URLClient.bin
+    let cancellable = URLClient.bin
       .path("status", statusCode)
       .accept(.json)
       .method(.put)
-      .stringPublisher()
+      .publisher(decode: Decoders.string)
       .sink(
         receiveCompletion: fulfill(e, expectError: true),
         receiveValue: { _ in XCTFail("Expected HTTP Status \(statusCode).") }
       )
-      .store(in: &cancellables)
     wait(for: [e], timeout: 10)
+    cancellable.cancel()
   }
 }
 

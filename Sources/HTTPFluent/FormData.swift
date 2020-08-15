@@ -48,7 +48,7 @@ public struct FormData {
   }
 
   public let boundary: String
-  public let encoding: Encoding
+  public var encoding: Encoding
   private var contents: [String: Any] = [:]
 
   public init(encoding: Encoding = .formEncoded) {

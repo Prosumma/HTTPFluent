@@ -16,9 +16,8 @@ import Foundation
  */
 public struct HTTPMethod: ConstantValue {
   public let rawValue: String
-
-  public init?(rawValue: String) {
-    self.rawValue = rawValue.uppercased()
+  public init(constantValue value: String) {
+    rawValue = value
   }
 }
 
