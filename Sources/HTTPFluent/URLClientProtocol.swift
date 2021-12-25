@@ -23,6 +23,11 @@ public protocol URLClientProtocol: URLRequestBuilderProtocol {
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   var publisher: AnyPublisher<Data, URLError> { get }
   
+#if swift(>=5.5)
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  func receive() async throws -> Data
+#endif
+
   /**
    Executes the underlying `URLRequest` and calls `callback` on the given `queue` when it
    completes.

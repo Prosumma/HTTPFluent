@@ -104,6 +104,27 @@ extension URLClient: URLClientProtocol {
       task.resume()
     }
   }
+  
+  #if swift(>=5.5)
+
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+  public func receive() async throws -> Data {
+    switch request {
+    case .failure(let error):
+      throw error
+    case .success(let request):
+      let (data, response): (Data, URLResponse)
+      do {
+        (data, response) = try await session.data(for: request)
+      } catch {
+        throw URLError.error(error)
+      }
+      return try responseHandler(data, response)
+    }
+  }
+
+  #endif
+
     
   public func build(_ apply: (inout URLRequestBuilder) -> Void) -> URLClient {
     var client = self
