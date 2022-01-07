@@ -18,7 +18,7 @@ import HTTPFluent
 class HTTPFluentAsyncTests: XCTestCase {
   func testGetJSON() async throws {
     let slideshows = try await URLClient.bin.path("json").receive(json: Slideshows.self)
-    print(slideshows)
+    XCTAssertEqual(slideshows.slideshow.title, "Sample Slide Show")
   }
 }
 
