@@ -31,10 +31,10 @@ public extension URLClientProtocol {
    `Decoders.string` is a function which decodes from `Data`
    to `String`, assuming the underlying `Data` is UTF-8.
    */
-  func publisher<Response>(
+  func receivePublisher<Response>(
     decode: @escaping Decoders.Decode<Response>
   ) -> AnyPublisher<Response, URLError> {
-    publisher.tryMap(decode).mapErrorIfNeeded(URLError.decoding).eraseToAnyPublisher()
+    receivePublisher.tryMap(decode).mapErrorIfNeeded(URLError.decoding).eraseToAnyPublisher()
   }
   
   /**
@@ -44,19 +44,19 @@ public extension URLClientProtocol {
    If `decoder` is `JSONDecoder`, the `Accept: application/json` is sent
    automatically with the request.
    */
-  func publisher<Response, Decoder>(
+  func receivePublisher<Response, Decoder>(
     decoding type: Response.Type = Response.self,
     decoder: Decoder
   ) -> AnyPublisher<Response, URLError> where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
     let fluent = decoder is JSONDecoder ? accept(.json) : self
-    return fluent.publisher(decode: Decoders.decode(type, with: decoder))
+    return fluent.receivePublisher(decode: Decoders.decode(type, with: decoder))
   }
 
   /// Decodes the `Data` in the published stream using a default `JSONDecoder`.
-  func publisher<Response: Decodable>(
+  func receivePublisher<Response: Decodable>(
     json type: Response.Type = Response.self
   ) -> AnyPublisher<Response, URLError> {
-    accept(.json).publisher(decode: Decoders.json(type))
+    accept(.json).receivePublisher(decode: Decoders.json(type))
   }
 
 }

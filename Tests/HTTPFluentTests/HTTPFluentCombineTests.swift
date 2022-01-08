@@ -40,7 +40,7 @@ final class HttpFluentCombineTests: XCTestCase {
     }
     let cancellable = URLClient.bin
       .path("json")
-      .publisher(json: Slideshows.self)
+      .receivePublisher(json: Slideshows.self)
       .sink(
         receiveCompletion: fulfill(e),
         receiveValue: print(slideshows:)
@@ -56,7 +56,7 @@ final class HttpFluentCombineTests: XCTestCase {
       .path("post")
       .post(json: slide)
       .accept(.json)
-      .publisher(decode: Decoders.string)
+      .receivePublisher(decode: Decoders.string)
       .sink(receiveCompletion: fulfill(e)) { s in
         print(s)
       }
@@ -71,7 +71,7 @@ final class HttpFluentCombineTests: XCTestCase {
       .path("status", statusCode)
       .accept(.json)
       .method(.put)
-      .publisher(decode: Decoders.string)
+      .receivePublisher(decode: Decoders.string)
       .sink(
         receiveCompletion: fulfill(e, expectError: true),
         receiveValue: { _ in XCTFail("Expected HTTP Status \(statusCode).") }

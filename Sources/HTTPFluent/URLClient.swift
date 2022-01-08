@@ -74,7 +74,7 @@ extension URLClient: URLClientProtocol {
   }
 
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-  public var publisher: AnyPublisher<Data, URLError> {
+  public var receivePublisher: AnyPublisher<Data, URLError> {
     request.publisher.flatMap { req in
       self.session
         .dataTaskPublisher(for: req)
