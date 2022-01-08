@@ -1,3 +1,12 @@
+//
+//  HTTPFluentCombineTests.swift
+//  HTTPFluent
+//
+//  Created by Gregory Higley on 2020-04-01.
+//  Copyright © 2020 Prosumma.
+//  This code is licensed under the MIT license (see LICENSE for details).
+//
+
 #if canImport(Combine)
 
 import Combine

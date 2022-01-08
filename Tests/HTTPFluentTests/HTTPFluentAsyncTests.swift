@@ -2,7 +2,9 @@
 //  HTTPFluentAsyncTests.swift
 //  
 //
-//  Created by Gregory Higley on 12/25/21.
+//  Created by Gregory Higley on 2021-12-25.
+//  Copyright © 2020 Prosumma.
+//  This code is licensed under the MIT license (see LICENSE for details).
 //
 
 #if canImport(Combine)

@@ -2,7 +2,9 @@
 //  URLClientProtocol+Receive.swift
 //  HTTPFluent
 //
-//  Created by Gregory Higley on 8/12/20.
+//  Created by Gregory Higley on 2020-08-12.
+//  Copyright © 2020 Prosumma.
+//  This code is licensed under the MIT license (see LICENSE for details).
 //
 
 #if canImport(Combine)
