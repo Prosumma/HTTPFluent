@@ -27,12 +27,12 @@ import Foundation
  let token = "xyz123"
  let attendee = Attendee(token: token)
  let client = HTTPClient(url: "https://api.patron.com/api")
- client
+ await client
    .path("attendee", token) // api/attendee/xyz123
    .query(7, forName: "x") // ?x=7
    .authorization(bearer: jwt)
    .post(json: attendee)
-   .dataTaskPublisher(decoding: AttendeeResponse.self)
+   .receive(json: AttendeeResponse.self)
  ```
  */
 public struct URLClient {
