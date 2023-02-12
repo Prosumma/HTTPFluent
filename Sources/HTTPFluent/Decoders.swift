@@ -7,7 +7,9 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
+#if canImport(Combine)
 import Combine
+#endif
 import Foundation
 
 public struct Decoders {
