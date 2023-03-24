@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import FoundationNetworking
 
 public struct URLRequestBuilder {
   public typealias Apply = (inout Self) -> Void

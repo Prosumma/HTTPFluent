@@ -18,11 +18,13 @@ import Foundation
  `URLRequestBuilderProtocol`.
  */
 public protocol URLClientProtocol: URLRequestBuilderProtocol {
+#if canImport(Combine)
   /**
    Publishes the `Data` result of executing the underlying `URLRequest`.
    */
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   var receivePublisher: AnyPublisher<Data, URLError> { get }
+#endif
   
 #if swift(>=5.5)
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)

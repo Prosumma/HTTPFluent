@@ -11,6 +11,7 @@
 import Combine
 #endif
 import Foundation
+import FoundationNetworking
 
 public extension URLRequestBuilderProtocol {
   /**

@@ -12,6 +12,7 @@ import Combine
 #endif
 
 import Foundation
+import FoundationNetworking
 
 /**
  Perform HTTP operations on a base URL.
@@ -73,6 +74,8 @@ extension URLClient: URLClientProtocol {
     builder.request
   }
 
+  #if canImport(Combine)
+
   @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public var receivePublisher: AnyPublisher<Data, URLError> {
     request.publisher.flatMap { req in
@@ -82,6 +85,8 @@ extension URLClient: URLClientProtocol {
         .mapToURLError
     }.eraseToAnyPublisher()
   }
+
+  #endif
   
   public func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (URLResult<Data>) -> Void) {
     switch request {

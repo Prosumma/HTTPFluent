@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import FoundationNetworking
 
 /// An error that may occur as a result of constructing or publishing a `URLRequest`.
 public enum URLError: Error {

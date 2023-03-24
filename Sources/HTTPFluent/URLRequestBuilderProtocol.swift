@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import FoundationNetworking
 
 /// A conforming type may be used to build a `URLRequest`.
 public protocol URLRequestBuilderProtocol {
