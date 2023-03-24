@@ -119,9 +119,19 @@ extension URLClient: URLClientProtocol {
     case .failure(let error):
       throw error
     case .success(let request):
-      let (data, response): (Data, URLResponse)
+      let (data, response): (Data?, URLResponse?)
       do {
-        (data, response) = try await session.data(for: request)
+        #if os(Linux)
+          (data, response) = try await withCheckedThrowingContinuation { continuation in
+            let task = session.dataTask(with: request) { (data, response, error) in
+              if let error = error { continuation.resume(throwing: error) }
+              continuation.resume(returning: (data, response))
+            }
+            task.resume()
+          }
+        #else
+          (data, response) = try await session.data(for: request)
+        #endif
       } catch {
         throw URLError.error(error)
       }
