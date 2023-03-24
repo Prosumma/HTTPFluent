@@ -22,6 +22,11 @@ class HTTPFluentAsyncTests: XCTestCase {
     let slideshows = try await URLClient.bin.path("json").receive(json: Slideshows.self)
     XCTAssertEqual(slideshows.slideshow.title, "Sample Slide Show")
   }
+  
+  func testHeaders() async throws {
+    let response = try await URLClient.bin.path("headers").content(type: .json, charset: .utf8).receive(json: HTTPHeaderResponse.self)
+    XCTAssertEqual(response.headers["Content-Type"], "application/json;charset=utf-8")
+  }
 }
 
 #endif

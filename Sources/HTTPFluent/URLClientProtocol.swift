@@ -7,11 +7,11 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
+import Foundation
+
 #if canImport(Combine)
 import Combine
 #endif
-
-import Foundation
 
 /**
  Adds the ability to publish a `URLRequest` built using

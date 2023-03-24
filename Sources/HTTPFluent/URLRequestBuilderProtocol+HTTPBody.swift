@@ -7,10 +7,11 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
+import Foundation
+
 #if canImport(Combine)
 import Combine
 #endif
-import Foundation
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
