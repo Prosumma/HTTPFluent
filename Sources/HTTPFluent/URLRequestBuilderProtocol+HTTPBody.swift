@@ -11,7 +11,10 @@
 import Combine
 #endif
 import Foundation
+
+#if canImport(FoundationNetworking)
 import FoundationNetworking
+#endif
 
 public extension URLRequestBuilderProtocol {
   /**

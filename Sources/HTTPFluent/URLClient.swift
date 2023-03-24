@@ -12,7 +12,10 @@ import Combine
 #endif
 
 import Foundation
+
+#if canImport(FoundationNetworking)
 import FoundationNetworking
+#endif
 
 /**
  Perform HTTP operations on a base URL.

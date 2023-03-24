@@ -8,7 +8,10 @@
 //
 
 import Foundation
+
+#if canImport(FoundationNetworking)
 import FoundationNetworking
+#endif
 
 public struct URLRequestBuilder {
   public typealias Apply = (inout Self) -> Void
