@@ -19,4 +19,7 @@ public protocol TopLevelEncoder {
   associatedtype Output
   func encode<T: Encodable>(_ value: T) throws -> Output
 }
+
+extension JSONDecoder: TopLevelDecoder {}
+extension JSONEncoder: TopLevelEncoder {}
 #endif
