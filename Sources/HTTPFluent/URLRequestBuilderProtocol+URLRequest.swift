@@ -35,7 +35,8 @@ public extension URLRequestBuilderProtocol {
     var contentType: String = type.rawValue
     if let charset = charset {
       let enc = CFStringConvertNSStringEncodingToEncoding(charset.rawValue)
-      let iana = CFStringConvertEncodingToIANACharSetName(enc) as NSString as String
+      let cfiana: CFString = CFStringConvertEncodingToIANACharSetName(enc)
+      let iana = String(describing: cfiana)
       contentType += ";charset=\(iana)"
     }
     return header(contentType, forField: .contentType)
