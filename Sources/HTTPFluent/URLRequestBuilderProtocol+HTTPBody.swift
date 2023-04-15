@@ -33,6 +33,11 @@ public extension URLRequestBuilderProtocol {
     body { data }
   }
 
+  /// Send a `String` without setting an HTTP method.
+  func send(string: String, encoding: String.Encoding = .utf8) -> Self {
+    send(data: string.data(using: .utf8)!)
+  }
+
   /// Send `FormData` without setting an HTTP method.
   func send(form: FormData) -> Self {
     content(type: form.contentType).body { form.encoded() }
@@ -54,6 +59,11 @@ public extension URLRequestBuilderProtocol {
   /// Post `Data`
   func post(data: Data) -> Self {
     send(data: data).method(.post)
+  }
+
+  /// Post a `String`
+  func post(string: String, encoding: String.Encoding = .utf8) -> Self {
+    send(string: string, encoding: encoding).method(.post)
   }
 
   /// Post `FormData`
@@ -79,6 +89,11 @@ public extension URLRequestBuilderProtocol {
     send(data: data).method(.patch)
   }
 
+  /// Patch a `String`
+  func patch(string: String, encoding: String.Encoding = .utf8) -> Self {
+    send(string: string, encoding: encoding).method(.patch)
+  }
+
   /// Patch `FormData`
   func patch(form: FormData) -> Self {
     send(form: form).method(.patch)
@@ -100,6 +115,11 @@ public extension URLRequestBuilderProtocol {
   /// Put `Data`
   func put(data: Data) -> Self {
     send(data: data).method(.put)
+  }
+
+  /// Put a `String`
+  func put(string: String, encoding: String.Encoding = .utf8) -> Self {
+    send(string: string, encoding: encoding).method(.put)
   }
 
   /// Put `FormData`
