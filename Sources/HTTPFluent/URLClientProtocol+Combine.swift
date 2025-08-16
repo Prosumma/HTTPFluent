@@ -7,11 +7,9 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
-#if canImport(Combine)
 import Combine
 import Foundation
 
-@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public extension URLClientProtocol {
   /**
    Decodes the `Data` in the published stream using `decode`.
@@ -42,7 +40,7 @@ public extension URLClientProtocol {
    If `decoder` is `JSONDecoder`, the `Accept: application/json` is sent
    automatically with the request.
    */
-  func receivePublisher<Response, Decoder>(
+  func receivePublisher<Response, Decoder: Sendable>(
     decoding type: Response.Type = Response.self,
     decoder: Decoder
   ) -> AnyPublisher<Response, URLError> where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
@@ -58,5 +56,3 @@ public extension URLClientProtocol {
   }
 
 }
-
-#endif

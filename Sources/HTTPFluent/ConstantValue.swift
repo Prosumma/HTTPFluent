@@ -9,7 +9,9 @@
 
 import Foundation
 
-public protocol ConstantValue: RawRepresentable & Hashable & ExpressibleByStringLiteral & CustomStringConvertible where RawValue == String {
+public protocol ConstantValue:
+  RawRepresentable, Hashable, ExpressibleByStringLiteral, CustomStringConvertible, Sendable where RawValue == String
+{
   init(constantValue value: String)
 }
 

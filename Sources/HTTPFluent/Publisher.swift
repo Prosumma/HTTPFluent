@@ -7,7 +7,6 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
-#if canImport(Combine)
 import Combine
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -28,4 +27,3 @@ public extension Publisher {
     return mapErrorIfNeeded(URLError.error)
   }
 }
-#endif

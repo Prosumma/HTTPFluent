@@ -7,33 +7,27 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
-import Foundation
-
-#if canImport(Combine)
 import Combine
-#endif
+import Foundation
 
 /**
  Adds the ability to publish a `URLRequest` built using
  `URLRequestBuilderProtocol`.
  */
 public protocol URLClientProtocol: URLRequestBuilderProtocol {
-#if canImport(Combine)
   /**
    Publishes the `Data` result of executing the underlying `URLRequest`.
    */
-  @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   var receivePublisher: AnyPublisher<Data, URLError> { get }
-#endif
-  
-#if swift(>=5.5)
-  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+
+  /**
+   Gets the result of the `URLRequest` asynchronously as `Data`.
+   */
   func receive() async throws -> Data
-#endif
 
   /**
    Executes the underlying `URLRequest` and calls `callback` on the given `queue` when it
    completes.
    */
-  func receive(on queue: DispatchQueue, callback: @escaping (URLResult<Data>) -> Void)
+  func receive(on queue: DispatchQueue, callback: @escaping @Sendable (URLResult<Data>) -> Void)
 }

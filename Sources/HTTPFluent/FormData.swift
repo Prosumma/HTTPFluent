@@ -25,8 +25,8 @@ import Foundation
  let data = form.encoded()
  ```
  */
-public struct FormData {
-  public enum Encoding {
+public struct FormData: @unchecked Sendable {
+  public enum Encoding: Sendable {
     case urlEncoded
     case formEncoded
   }
@@ -36,7 +36,7 @@ public struct FormData {
    `FormData` instance is encoded as "application/x-www-form-urlencoded",
    instances of this type are skipped without warning.
    */
-  public struct File {
+  public struct File: Sendable {
     public let filename: String
     public let content: Data
     public let headers: [String: String]

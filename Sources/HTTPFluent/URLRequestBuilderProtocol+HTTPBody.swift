@@ -7,11 +7,8 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
-import Foundation
-
-#if canImport(Combine)
 import Combine
-#endif
+import Foundation
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -24,7 +21,7 @@ public extension URLRequestBuilderProtocol {
    Don't use this. Use higher-level functions like `post(json:)`,
    which ultimately call this one.
    */
-  func body(_ body: @escaping () throws -> Data) -> Self {
+  func body(_ body: @escaping @Sendable () throws -> Data) -> Self {
     build(URLRequestBuilder.buildBody(body))
   }
   
@@ -44,7 +41,7 @@ public extension URLRequestBuilderProtocol {
   }
 
   /// Encode a type in the HTTP body without setting an HTTP method.
-  func send<Request: Encodable, Encoder: TopLevelEncoder>(
+  func send<Request: Encodable & Sendable, Encoder: TopLevelEncoder & Sendable>(
     _ request: Request,
     encoder: Encoder
   ) -> Self where Encoder.Output == Data {
@@ -52,7 +49,7 @@ public extension URLRequestBuilderProtocol {
   }
 
   /// Send JSON in the HTTP body without setting an HTTP method.
-  func send<Request: Encodable>(json request: Request) -> Self {
+  func send<Request: Encodable & Sendable>(json request: Request) -> Self {
     send(request, encoder: JSONEncoder()).content(type: .json)
   }
 
@@ -72,7 +69,7 @@ public extension URLRequestBuilderProtocol {
   }
 
   /// Post `Request` encoded with `Encoder`
-  func post<Request: Encodable, Encoder: TopLevelEncoder>(
+  func post<Request: Encodable & Sendable, Encoder: TopLevelEncoder & Sendable>(
     _ request: Request,
     encoder: Encoder
   ) -> Self where Encoder.Output == Data {
@@ -80,7 +77,7 @@ public extension URLRequestBuilderProtocol {
   }
 
   /// Post `Request` encoded as JSON
-  func post<Request: Encodable>(json request: Request) -> Self {
+  func post<Request: Encodable & Sendable>(json request: Request) -> Self {
     send(json: request).method(.post)
   }
 
@@ -100,7 +97,7 @@ public extension URLRequestBuilderProtocol {
   }
 
   /// Patch `Request` encoded with `Encoder`
-  func patch<Request: Encodable, Encoder: TopLevelEncoder>(
+  func patch<Request: Encodable & Sendable, Encoder: TopLevelEncoder & Sendable>(
     _ request: Request,
     encoder: Encoder
   ) -> Self where Encoder.Output == Data {
@@ -108,7 +105,7 @@ public extension URLRequestBuilderProtocol {
   }
 
   /// Patch `Request` encoded as JSON
-  func patch<Request: Encodable>(json request: Request) -> Self {
+  func patch<Request: Encodable & Sendable>(json request: Request) -> Self {
     send(json: request).method(.patch)
   }
 
@@ -128,7 +125,7 @@ public extension URLRequestBuilderProtocol {
   }
 
   /// Put `Request` encoded by `Encoder`
-  func put<Request: Encodable, Encoder: TopLevelEncoder>(
+  func put<Request: Encodable & Sendable, Encoder: TopLevelEncoder & Sendable>(
     _ request: Request,
     encoder: Encoder
   ) -> Self where Encoder.Output == Data {
@@ -136,7 +133,7 @@ public extension URLRequestBuilderProtocol {
   }
 
   /// Put `Request` encoded as JSON
-  func put<Request: Encodable>(json request: Request) -> Self {
+  func put<Request: Encodable & Sendable>(json request: Request) -> Self {
     send(json: request).method(.put)
   }
 }
