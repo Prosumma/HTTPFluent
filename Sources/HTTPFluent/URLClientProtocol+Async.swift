@@ -7,15 +7,9 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
+import Combine
 import Foundation
 
-#if canImport(Combine)
-import Combine
-#endif
-
-#if swift(>=5.5)
-
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 public extension URLClientProtocol {
   func receive<Response>(decode: @escaping Decoders.Decode<Response>) async throws -> Response {
     try decode(await receive())
@@ -34,5 +28,3 @@ public extension URLClientProtocol {
     try await receive(decode: Decoders.json(type))
   }
 }
-
-#endif

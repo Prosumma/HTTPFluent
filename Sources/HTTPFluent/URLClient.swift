@@ -7,11 +7,8 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
-import Foundation
-
-#if canImport(Combine)
 import Combine
-#endif
+import Foundation
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking
@@ -89,9 +86,6 @@ extension URLClient: URLClientProtocol {
     builder.request
   }
 
-  #if canImport(Combine)
-
-  @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   public var receivePublisher: AnyPublisher<Data, URLError> {
     request.publisher.flatMap { req in
       self.session
@@ -100,8 +94,6 @@ extension URLClient: URLClientProtocol {
         .mapToURLError
     }.eraseToAnyPublisher()
   }
-
-  #endif
   
   public func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping @Sendable (URLResult<Data>) -> Void) {
     switch request {
@@ -129,9 +121,6 @@ extension URLClient: URLClientProtocol {
     }
   }
   
-  #if swift(>=5.5)
-
-  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public func receive() async throws -> Data {
     switch request {
     case .failure(let error):
@@ -156,8 +145,6 @@ extension URLClient: URLClientProtocol {
       return try responseHandler(data, response)
     }
   }
-
-  #endif
 
   public func build(_ apply: (inout URLRequestBuilder) -> Void) -> URLClient {
     var client = self
