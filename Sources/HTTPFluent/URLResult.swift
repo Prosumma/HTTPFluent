@@ -9,4 +9,4 @@
 
 import Foundation
 
-public typealias URLResult<Success> = Result<Success, URLError>
+public typealias URLResult<Success: Sendable> = Result<Success, URLError>

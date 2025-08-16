@@ -13,8 +13,8 @@ import Foundation
 import Combine
 #endif
 
-public struct Decoders {
-  public typealias Decode<T> = (Data) throws -> T
+public struct Decoders: Sendable {
+  public typealias Decode<T> = @Sendable (Data) throws -> T
   
   public static func string(encoding: String.Encoding) -> Decode<String> {
     return { data in
@@ -27,7 +27,7 @@ public struct Decoders {
 
   public static let string: Decode<String> = Self.string(encoding: .utf8)
   
-  public static func decode<T: Decodable, Decoder: TopLevelDecoder>(_ type: T.Type, with decoder: Decoder) -> Decode<T> where Decoder.Input == Data {
+  public static func decode<T: Decodable, Decoder: TopLevelDecoder & Sendable>(_ type: T.Type, with decoder: Decoder) -> Decode<T> where Decoder.Input == Data {
     return { data in
       do {
         return try decoder.decode(type, from: data)

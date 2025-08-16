@@ -21,7 +21,7 @@ public extension URLClientProtocol {
     try decode(await receive())
   }
 
-  func receive<Response, Decoder>(
+  func receive<Response, Decoder: Sendable>(
     decoding type: Response.Type = Response.self,
     decoder: Decoder
   ) async throws -> Response where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {

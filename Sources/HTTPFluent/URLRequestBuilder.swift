@@ -13,14 +13,14 @@ import Foundation
 import FoundationNetworking
 #endif
 
-public struct URLRequestBuilder {
+public struct URLRequestBuilder: Sendable {
   public typealias Apply = (inout Self) -> Void
 
   fileprivate var error: URLError?
   fileprivate var components: URLComponents
   fileprivate var method: String = "GET"
   fileprivate var headers: [String: String] = [:]
-  fileprivate var body: (() throws -> Data)?
+  fileprivate var body: (@Sendable () throws -> Data)?
 
   private init(components: URLComponents) {
     self.components = components
@@ -109,7 +109,7 @@ extension URLRequestBuilder {
     }
   }
 
-  static func buildBody(_ body: @escaping () throws -> Data) -> URLRequestBuilder.Apply {
+  static func buildBody(_ body: @escaping @Sendable () throws -> Data) -> URLRequestBuilder.Apply {
     return { builder in
       builder.body = body
     }

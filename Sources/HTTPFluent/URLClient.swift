@@ -40,24 +40,36 @@ import FoundationNetworking
    .receive(json: AttendeeResponse.self)
  ```
  */
-public struct URLClient {
-  public typealias ResponseHandler = (Data?, URLResponse?) throws -> Data
+public struct URLClient: Sendable {
+  public typealias ResponseHandler = @Sendable (Data?, URLResponse?) throws -> Data
   
   let session: URLSession
   var builder: URLRequestBuilder
   let responseHandler: ResponseHandler
 
-  public init(builder: URLRequestBuilder, session: URLSession = URLSession(configuration: .ephemeral), responseHandler: @escaping ResponseHandler = URLClient.defaultResponseHandler) {
+  public init(
+    builder: URLRequestBuilder,
+    session: URLSession = URLSession(configuration: .ephemeral),
+    responseHandler: @escaping ResponseHandler = URLClient.defaultResponseHandler
+  ) {
     self.session = session
     self.builder = builder
     self.responseHandler = responseHandler
   }
 
-  public init(url: URL, session: URLSession = URLSession(configuration: .ephemeral), responseHandler: @escaping ResponseHandler = URLClient.defaultResponseHandler) {
+  public init(
+    url: URL,
+    session: URLSession = URLSession(configuration: .ephemeral),
+    responseHandler: @escaping ResponseHandler = URLClient.defaultResponseHandler
+  ) {
     self.init(builder: URLRequestBuilder(url: url), session: session, responseHandler: responseHandler)
   }
 
-  public init(url: String, session: URLSession = URLSession(configuration: .ephemeral), responseHandler: @escaping ResponseHandler = URLClient.defaultResponseHandler) {
+  public init(
+    url: String,
+    session: URLSession = URLSession(configuration: .ephemeral),
+    responseHandler: @escaping ResponseHandler = URLClient.defaultResponseHandler
+  ) {
     self.init(builder: URLRequestBuilder(url: url), session: session, responseHandler: responseHandler)
   }
   
@@ -91,14 +103,17 @@ extension URLClient: URLClientProtocol {
 
   #endif
   
-  public func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping (URLResult<Data>) -> Void) {
+  public func receive(on queue: DispatchQueue = DispatchQueue.global(), callback: @escaping @Sendable (URLResult<Data>) -> Void) {
     switch request {
     case .failure(let error):
       queue.async { callback(.failure(error)) }
     case .success(let request):
       let task = session.dataTask(with: request) { (data, response, error) in
         var result: URLResult<Data> = .failure(.unknown)
-        defer { queue.async { callback(result) } }
+        defer {
+          let result = result
+          queue.async { callback(result) }
+        }
         if let error = error {
           return result = .failure(.error(error))
         }
@@ -144,7 +159,6 @@ extension URLClient: URLClientProtocol {
 
   #endif
 
-    
   public func build(_ apply: (inout URLRequestBuilder) -> Void) -> URLClient {
     var client = self
     apply(&client.builder)

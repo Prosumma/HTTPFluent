@@ -35,5 +35,5 @@ public protocol URLClientProtocol: URLRequestBuilderProtocol {
    Executes the underlying `URLRequest` and calls `callback` on the given `queue` when it
    completes.
    */
-  func receive(on queue: DispatchQueue, callback: @escaping (URLResult<Data>) -> Void)
+  func receive(on queue: DispatchQueue, callback: @escaping @Sendable (URLResult<Data>) -> Void)
 }

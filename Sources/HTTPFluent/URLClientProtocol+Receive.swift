@@ -24,7 +24,7 @@ public extension URLClientProtocol {
    */
   func receive(
     on queue: DispatchQueue = DispatchQueue.global(),
-    callback: @escaping (URLResult<Data>) -> Void)
+    callback: @escaping @Sendable (URLResult<Data>) -> Void)
   {
     receive(on: queue, callback: callback)
   }
@@ -38,7 +38,7 @@ public extension URLClientProtocol {
   func receive<Response>(
     on queue: DispatchQueue = DispatchQueue.global(),
     decode: @escaping Decoders.Decode<Response>,
-    callback: @escaping (URLResult<Response>) -> Void
+    callback: @escaping @Sendable (URLResult<Response>) -> Void
   ) {
     receive(on: queue) { result in
       do {
@@ -51,11 +51,11 @@ public extension URLClientProtocol {
     }
   }
     
-  func receive<Response, Decoder>(
+  func receive<Response, Decoder: Sendable>(
     decoding type: Response.Type = Response.self,
     decoder: Decoder,
     on queue: DispatchQueue = DispatchQueue.global(),
-    callback: @escaping (URLResult<Response>) -> Void
+    callback: @escaping @Sendable (URLResult<Response>) -> Void
   ) where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
     let fluent = decoder is JSONDecoder ? accept(.json) : self
     return fluent.receive(on: queue, decode: Decoders.decode(type, with: decoder), callback: callback)
@@ -64,7 +64,7 @@ public extension URLClientProtocol {
   func receive<Response>(
     json type: Response.Type = Response.self,
     on queue: DispatchQueue = DispatchQueue.global(),
-    callback: @escaping (URLResult<Response>) -> Void
+    callback: @escaping @Sendable (URLResult<Response>) -> Void
   ) where Response: Decodable {
     receive(on: queue, decode: Decoders.json(type), callback: callback)
   }
