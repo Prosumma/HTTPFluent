@@ -14,29 +14,6 @@ import Foundation
 import FoundationNetworking
 #endif
 
-/**
- Perform HTTP operations on a base URL.
-
- Most uses of HTTP at Patron and other organizations
- perform one or more operations against some API hosted
- at a specific base URL. `HTTPClient` makes this very
- easy and natural using a fluent interface.
-
- This is best illustrated with an example:
-
- ```swift
- let jwt: String = "...imagine a JWT..."
- let token = "xyz123"
- let attendee = Attendee(token: token)
- let client = HTTPClient(url: "https://api.patron.com/api")
- await client
-   .path("attendee", token) // api/attendee/xyz123
-   .query(7, forName: "x") // ?x=7
-   .authorization(bearer: jwt)
-   .post(json: attendee)
-   .receive(json: AttendeeResponse.self)
- ```
- */
 public struct URLClient: Sendable {
   public typealias ResponseHandler = @Sendable (Data?, URLResponse?) throws -> Data
   
