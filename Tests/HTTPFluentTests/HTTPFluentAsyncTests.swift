@@ -7,26 +7,18 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
-#if canImport(Combine)
 import Combine
-#endif
-
-import XCTest
 import HTTPFluent
+import Testing
 
-#if swift(>=5.5)
-
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
-class HTTPFluentAsyncTests: XCTestCase {
-  func testGetJSON() async throws {
+struct HTTPFluentAsyncTests {
+  @Test func testGetJSON() async throws {
     let slideshows = try await URLClient.bin.path("json").receive(json: Slideshows.self)
-    XCTAssertEqual(slideshows.slideshow.title, "Sample Slide Show")
+    #expect(slideshows.slideshow.title == "Sample Slide Show")
   }
   
-  func testHeaders() async throws {
+  @Test func testHeaders() async throws {
     let response = try await URLClient.bin.path("headers").content(type: .json, charset: .utf8).receive(json: HTTPHeaderResponse.self)
-    XCTAssertEqual(response.headers["Content-Type"], "application/json;charset=utf-8")
+    #expect(response.headers["Content-Type"] == "application/json;charset=utf-8")
   }
 }
-
-#endif

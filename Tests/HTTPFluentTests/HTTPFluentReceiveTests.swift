@@ -7,24 +7,17 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
-import XCTest
 import HTTPFluent
+import Testing
 
-class HTTPFluentReceiveTests: XCTestCase {
-
-  func testGetJSON() {
-    let e = expectation(description: "http")
-    URLClient.bin
-      .path("json")
-      .receive(json: Slideshows.self) { result in
-        do {
-          try print(result.get())
-        } catch {
-          XCTFail("\(error)")
+struct HTTPFluentReceiveTests {
+  @Test func testGetJSON() async throws {
+    _ = try await withCheckedThrowingContinuation { cont in
+      URLClient.bin
+        .path("json")
+        .receive(json: Slideshows.self) { result in
+          cont.resume(with: result)
         }
-        e.fulfill()
-      }
-    wait(for: [e], timeout: 10)
+    }
   }
-  
 }

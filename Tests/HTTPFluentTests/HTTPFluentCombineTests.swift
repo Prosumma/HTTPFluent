@@ -7,13 +7,10 @@
 //  This code is licensed under the MIT license (see LICENSE for details).
 //
 
-#if canImport(Combine)
-
 import Combine
 import XCTest
 import HTTPFluent
 
-@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 func fulfill<E: Error>(_ e: XCTestExpectation, expectError: Bool = false) -> (Subscribers.Completion<E>) -> Void {
   return { c in
     if expectError {
@@ -30,7 +27,6 @@ func fulfill<E: Error>(_ e: XCTestExpectation, expectError: Bool = false) -> (Su
   }
 }
 
-@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 final class HttpFluentCombineTests: XCTestCase {
 
   func testGetJSON() {
@@ -80,5 +76,3 @@ final class HttpFluentCombineTests: XCTestCase {
     cancellable.cancel()
   }
 }
-
-#endif
