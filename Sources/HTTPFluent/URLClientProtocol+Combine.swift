@@ -40,7 +40,7 @@ public extension URLClientProtocol {
    If `decoder` is `JSONDecoder`, the `Accept: application/json` is sent
    automatically with the request.
    */
-  func receivePublisher<Response, Decoder: Sendable>(
+  func receivePublisher<Response: Sendable, Decoder: Sendable>(
     decoding type: Response.Type = Response.self,
     decoder: Decoder
   ) -> AnyPublisher<Response, URLError> where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
@@ -49,10 +49,9 @@ public extension URLClientProtocol {
   }
 
   /// Decodes the `Data` in the published stream using a default `JSONDecoder`.
-  func receivePublisher<Response: Decodable>(
+  func receivePublisher<Response: Decodable & Sendable>(
     json type: Response.Type = Response.self
   ) -> AnyPublisher<Response, URLError> {
     accept(.json).receivePublisher(decode: Decoders.json(type))
   }
-
 }

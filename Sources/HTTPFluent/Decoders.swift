@@ -27,7 +27,7 @@ public struct Decoders: Sendable {
 
   public static let string: Decode<String> = Self.string(encoding: .utf8)
   
-  public static func decode<T: Decodable, Decoder: TopLevelDecoder & Sendable>(_ type: T.Type, with decoder: Decoder) -> Decode<T> where Decoder.Input == Data {
+  public static func decode<T: Decodable & Sendable, Decoder: TopLevelDecoder & Sendable>(_ type: T.Type, with decoder: Decoder) -> Decode<T> where Decoder.Input == Data {
     return { data in
       do {
         return try decoder.decode(type, from: data)
@@ -37,7 +37,7 @@ public struct Decoders: Sendable {
     }
   }
     
-  public static func json<T: Decodable>(_ type: T.Type) -> Decode<T> {
+  public static func json<T: Decodable & Sendable>(_ type: T.Type) -> Decode<T> {
     return decode(type, with: JSONDecoder())
   }
 }

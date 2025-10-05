@@ -11,18 +11,18 @@ import Combine
 import Foundation
 
 public extension URLClientProtocol {
-  func receive<Response>(decode: @escaping Decoders.Decode<Response>) async throws -> Response {
+  func receive<Response: Sendable>(decode: @escaping Decoders.Decode<Response>) async throws -> Response {
     try decode(await receive())
   }
 
-  func receive<Response, Decoder: Sendable>(
+  func receive<Response: Sendable, Decoder: Sendable>(
     decoding type: Response.Type = Response.self,
     decoder: Decoder
   ) async throws -> Response where Response: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
     try await receive(decode: Decoders.decode(type, with: decoder))
   }
 
-  func receive<Response: Decodable>(
+  func receive<Response: Decodable & Sendable>(
     json type: Response.Type
   ) async throws -> Response {
     try await receive(decode: Decoders.json(type))
